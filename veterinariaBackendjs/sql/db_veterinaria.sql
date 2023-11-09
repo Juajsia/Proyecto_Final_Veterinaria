@@ -718,4 +718,4 @@ GRANT 'Veterinario' TO 'User_Veterinario'@'localhost';
 GRANT 'Vendedor' TO 'User_Vendedor'@'localhost';
 GRANT 'login_management' TO 'User_Login'@'localhost';
 
-select * From mysql.user;
+-- select * From mysql.user;

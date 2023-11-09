@@ -1,10 +1,11 @@
 import express from 'express'
-import { routerPerson } from './routes/routerPerson.js'
+import { createPersonRouter } from './routes/routerPerson.js'
+import { PersonModel } from './models/modelPerson.js'
 
 const app = express()
 
 app.use(express.json())
-app.use('/api/persona', routerPerson)
+app.use('/api/person', createPersonRouter({ PersonModel }))
 
 const PORT = process.env.PORT ?? 3000
 
