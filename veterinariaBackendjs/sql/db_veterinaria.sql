@@ -682,6 +682,7 @@ insert into rol (nombreRol) values
 
 
 -- Creación de Roles 
+/*
 Drop role if exists 'Admin', 'Veterinario', 'Vendedor', 'login_management';
 create role 'Admin', 'Veterinario', 'Vendedor', 'login_management';
 
@@ -702,7 +703,7 @@ GRANT SELECT, INSERT, UPDATE ON db_veterinaria.Factura TO 'Vendedor';
 GRANT SELECT, INSERT, UPDATE ON db_veterinaria.factura_producto TO 'Vendedor';
 GRANT SELECT, INSERT, UPDATE ON db_veterinaria.producto TO 'Vendedor';
 GRANT SELECT ON db_veterinaria.Orden TO 'Vendedor';
-
+*/
 -- creación de los Usuarios
 
 Drop user if exists 'User_Administrador'@'localhost', 'User_Veterinario'@'localhost', 'User_Vendedor'@'localhost', 'User_Login'@'localhost';
@@ -713,9 +714,28 @@ CREATE USER 'User_Login'@'localhost' IDENTIFIED BY 'Login1234';
 
 -- Asignar Roles
 
+GRANT SELECT ON db_Veterinaria.credenciales to 'User_Login'@'localhost';
+GRANT SELECT ON db_Veterinaria.persona to 'User_Login'@'localhost';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON db_veterinaria.* TO 'User_Administrador'@'localhost';
+
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.mascota TO 'User_Veterinario'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.historia_clinica TO 'User_Veterinario'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.orden TO 'User_Veterinario'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.medicamento TO 'User_Veterinario'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.orden_medicamento TO 'User_Veterinario'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.historial_vacunas TO 'User_Veterinario'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.vacuna TO 'User_Veterinario'@'localhost';
+
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.Factura TO 'User_Vendedor'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.factura_producto TO 'User_Vendedor'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON db_veterinaria.producto TO 'User_Vendedor'@'localhost';
+GRANT SELECT ON db_veterinaria.Orden TO 'User_Vendedor'@'localhost';
+
+/*
 GRANT 'Admin' TO 'User_Administrador'@'localhost';
 GRANT 'Veterinario' TO 'User_Veterinario'@'localhost';
 GRANT 'Vendedor' TO 'User_Vendedor'@'localhost';
 GRANT 'login_management' TO 'User_Login'@'localhost';
-
--- select * From mysql.user;
+*/
+FLUSH PRIVILEGES;
