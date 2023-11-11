@@ -741,4 +741,4 @@ GRANT 'login_management' TO 'User_Login'@'localhost';
 */
 FLUSH PRIVILEGES;
 
-select * from persona;
+/*select * from persona;*/
