@@ -732,6 +732,7 @@ GRANT SELECT, INSERT, UPDATE ON db_veterinaria.factura_producto TO 'User_Vendedo
 GRANT SELECT, INSERT, UPDATE ON db_veterinaria.producto TO 'User_Vendedor'@'localhost';
 GRANT SELECT ON db_veterinaria.Orden TO 'User_Vendedor'@'localhost';
 
+
 /*
 GRANT 'Admin' TO 'User_Administrador'@'localhost';
 GRANT 'Veterinario' TO 'User_Veterinario'@'localhost';
@@ -739,3 +740,5 @@ GRANT 'Vendedor' TO 'User_Vendedor'@'localhost';
 GRANT 'login_management' TO 'User_Login'@'localhost';
 */
 FLUSH PRIVILEGES;
+
+select * from persona;

@@ -1,3 +1,5 @@
+import { validatePerson } from '../schemas/schemaPerson.js'
+
 export class PersonController {
   constructor ({ PersonModel }) {
     this.PersonModel = PersonModel
@@ -20,12 +22,18 @@ export class PersonController {
 
   create = async (req, res) => {
     // validar data
-    const data = req.body
-    const person = await this.PersonModel.create({ data })
-    if (person.err) {
-      res.status(400).json(person)
+    const result = validatePerson(req.body)
+
+    if (result.error) {
+      res.status(400).json({ err: JSON.parse(result.error.message) })
     } else {
-      res.json(person)
+      console.log(result.data)
+      const person = await this.PersonModel.create({ data: result.data })
+      if (person.err) {
+        res.status(400).json(person)
+      } else {
+        res.json(person)
+      }
     }
   }
 

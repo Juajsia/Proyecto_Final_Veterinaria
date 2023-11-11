@@ -1,10 +1,11 @@
+/* eslint-disable camelcase */
 import mysql from 'mysql2/promise'
 
 const DEFAULT_CONFIG = {
   host: 'localhost',
-  user: 'User_Administrador',
+  user: 'root',
   port: 3306,
-  password: 'admin123',
+  password: '1234',
   database: 'db_veterinaria'
 }
 const connectionString = process.env.DATABASE_URL ?? DEFAULT_CONFIG
@@ -54,13 +55,14 @@ export class PersonModel {
       if (person.length > 0) {
         return { err: 'usuario ya registrado' }
       } else {
-        const { primerNombre, segundoNombre, primerApellido, segundoApellido, edad, IdRol } = data
-        await connection.query('call Create_Persona(?, ?, ?, ?, ?, ?, ?);', [cedula, primerNombre, segundoNombre, primerApellido, segundoApellido, edad, IdRol])
+        const { primerNombre, segundoNombre, primerApellido, segundoApellido, edad, idRol } = data
+        await connection.query('call Create_Persona(?, ?, ?, ?, ?, ?, ?);', [cedula, primerNombre, segundoNombre, primerApellido, segundoApellido, edad, idRol])
         return { msg: `usuario ${primerNombre} registrado con exito` }
       }
     } catch (error) {
       return {
-        err: 'Error creando Persona'
+        err: 'Error creando Persona',
+        msg: error
       }
     }
   }
