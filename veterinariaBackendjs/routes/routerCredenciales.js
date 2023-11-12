@@ -12,5 +12,7 @@ export const createCredRouter = ({ CredModel }) => {
   credRouter.delete('/:user', credController.delete)
   credRouter.patch('/:oldUser', credController.update)
 
+  credRouter.post('/login', credController.login)
+
   return credRouter
 }

@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import mysql from 'mysql2/promise'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 const DEFAULT_CONFIG = {
   host: 'localhost',
@@ -105,4 +106,37 @@ export class CredModel {
       }
     }
   }
+
+  static async login ({ data }) {
+    const { Usuario, Contrasenia } = data
+    try {
+      const [cred] = await connection.query('Select * from Credenciales where Usuario = ?;', [Usuario])
+      if (cred.length === 0) {
+        return {
+          typeErr: 1,
+          err: 'Error en usuario/contraseña'
+        }
+      }
+      const eq = await bcrypt.compare(Contrasenia, cred[0].Contrasenia)
+      if (!eq) {
+        return { err: 'Error en usuario/contraseña' }
+      }
+      const [rol] = await connection.query('select IdRol from Persona where cedula = ?;', [cred[0].idPersona])
+      const token = createToken({ data: { Usuario, Rol: rol[0].IdRol } })
+      return { succes: 'Login Correcto', token }
+    } catch (error) {
+      return {
+        err: 'Error buscando credenciales',
+        msg: error
+      }
+    }
+  }
+}
+
+function createToken ({ data }) {
+  const payLoad = {
+    Usuario: data.Usuario,
+    Rol: data.Rol
+  }
+  return jwt.sign(payLoad, process.env.SECRET_KEY)
 }

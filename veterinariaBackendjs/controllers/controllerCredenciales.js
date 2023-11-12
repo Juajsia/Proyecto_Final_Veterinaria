@@ -62,4 +62,19 @@ export class CredController {
       }
     }
   }
+
+  login = async (req, res) => {
+    const result = validateParcialCred(req.body)
+    if (result.error) {
+      res.status(400).json({ err: JSON.parse(result.error.message) })
+    } else {
+      const loginUser = await this.CredModel.login({ data: result.data })
+
+      if (loginUser.err) {
+        res.status(400).json(loginUser)
+      } else {
+        res.json(loginUser)
+      }
+    }
+  }
 }

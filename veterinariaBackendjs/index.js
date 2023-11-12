@@ -1,4 +1,5 @@
 import express from 'express'
+import 'dotenv/config'
 import { createPersonRouter } from './routes/routerPerson.js'
 import { createPetRouter } from './routes/routerPet.js'
 import { PersonModel } from './models/modelPerson.js'
