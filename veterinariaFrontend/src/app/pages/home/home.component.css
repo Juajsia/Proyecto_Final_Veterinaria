@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+    font-family: "Open sans", sans-serif;
+    
+}
+
+.carrusel {
+    position: relative;
+    top: 85px;
+}
