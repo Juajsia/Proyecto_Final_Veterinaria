@@ -38,10 +38,9 @@ CREATE TABLE Mascota (
     Especie VARCHAR(20) NOT NULL,
     Raza VARCHAR(20) NOT NULL,
     Color VARCHAR(20) NOT NULL,
-    Tamaño VARCHAR(10) NOT NULL,
+    Tamanio VARCHAR(10) NOT NULL,
     Peso VARCHAR(10) NOT NULL,
     IdDuenio INT NOT NULL,
-    IdHistoria INT NOT NULL,
     PRIMARY KEY (IdMascota)
 );
 
@@ -120,8 +119,7 @@ alter table Persona add foreign key (Idrol) references Rol(IdRol);
 alter table Credenciales add foreign key (idPersona) references Persona(cedula);
 
 alter table Mascota add(
-	foreign key (IdDuenio) references Persona(cedula),
-	foreign key (IdHistoria) references Historia_Clinica(IdHistoria_Clinica)
+	foreign key (IdDuenio) references Persona(cedula)
 );
 
 alter table Historia_Clinica add(
@@ -215,13 +213,12 @@ CREATE PROCEDURE Crear_Mascota (in Nombre VARCHAR(20),
     in Especie VARCHAR(20),
     in Raza VARCHAR(20),
     in Color VARCHAR(20),
-    in Tamaño VARCHAR(10),
+    in Tamanio VARCHAR(10),
     in Peso VARCHAR(10),
-    in IdDuenio INT,
-    in IdHistoria INT)
+    in IdDuenio INT)
 BEGIN    
-	 insert into Mascota (idMascota,Nombre,Edad,Especie,Raza,Color,Tamaño,Peso,IdDuenio,IdHistoria) 
-     values (UUID_TO_BIN(UUID()),Nombre,Edad,Especie,Raza,Color,Tamaño,Peso,IdDuenio,IdHistoria);
+	 insert into Mascota (idMascota,Nombre,Edad,Especie,Raza,Color,Tamanio,Peso,IdDuenio) 
+     values (UUID_TO_BIN(UUID()),Nombre,Edad,Especie,Raza,Color,Tamanio,Peso,IdDuenio);
 END &&  
 DELIMITER ;
 
@@ -233,11 +230,12 @@ CREATE PROCEDURE Actualizar_Mascota (in ID varchar(36),
     in P_Especie VARCHAR(20),
     in P_Raza VARCHAR(20),
     in P_Color VARCHAR(20),
-    in P_Tamaño VARCHAR(10),
-    in P_Peso VARCHAR(10))
+    in P_Tamanio VARCHAR(10),
+    in P_Peso VARCHAR(10),
+    in P_IdDuenio INT)
 BEGIN    
 	 update Mascota set Nombre = P_Nombre, Edad = P_Edad, Especie = P_Especie, Raza = P_Raza,
-     Color = P_Color, Tamaño = P_Tamaño, Peso = P_Peso where IdMascota = UUID_TO_BIN(ID);
+     Color = P_Color, Tamanio = P_Tamanio, Peso = P_Peso, IdDuenio = P_IdDuenio  where IdMascota = UUID_TO_BIN(ID);
 END &&  
 DELIMITER ;
 
@@ -245,7 +243,7 @@ Drop procedure if exists Consultar_Mascota;
 DELIMITER &&  
 CREATE PROCEDURE Consultar_Mascota (in id varchar(36))
 BEGIN    
-	 select BIN_TO_UUID(idMascota) IDMascota,Nombre,Edad,Especie,Raza,Color,Tamaño,Peso,IdDuenio,IdHistoria from Mascota where IdMascota= UUID_TO_BIN(id);
+	 select BIN_TO_UUID(idMascota) IDMascota,Nombre,Edad,Especie,Raza,Color,Tamanio,Peso,IdDuenio from Mascota where IdMascota= UUID_TO_BIN(id);
 END &&  
 DELIMITER ;
 
@@ -740,5 +738,3 @@ GRANT 'Vendedor' TO 'User_Vendedor'@'localhost';
 GRANT 'login_management' TO 'User_Login'@'localhost';
 */
 FLUSH PRIVILEGES;
-
-/*select * from persona;*/
