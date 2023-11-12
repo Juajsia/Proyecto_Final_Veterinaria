@@ -82,4 +82,22 @@ export class PersonModel {
       }
     }
   }
+
+  static async update ({ id, data }) {
+    try {
+      const person = await this.getById({ id })
+      if (person.err) {
+        return { err: 'usuario no está registrado' }
+      } else {
+        const usuarioAct = { ...person[0], ...data }
+        const { Primer_nombre: primerNombre, Segundo_nombre: segundoNombre, Primer_Apellido: primerApellido, Segundo_Apellido: segundoApellido, edad, IdRol } = usuarioAct
+        await connection.query('call Actualizar_Persona(?, ?, ?, ?, ?, ?, ?);', [id, primerNombre, segundoNombre, primerApellido, segundoApellido, edad, IdRol])
+        return { msg: 'usuario actualizado con exito' }
+      }
+    } catch (error) {
+      return {
+        err: 'Error actualizando Persona'
+      }
+    }
+  }
 }

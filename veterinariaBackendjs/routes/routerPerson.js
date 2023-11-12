@@ -10,7 +10,7 @@ export const createPersonRouter = ({ PersonModel }) => {
   personRouter.get('/:id', personController.getById)
   personRouter.post('/', personController.create)
   personRouter.delete('/:id', personController.delete)
-  //   personRouter.patch('/:id', personController.update)
+  personRouter.patch('/:id', personController.update)
 
   return personRouter
 }
