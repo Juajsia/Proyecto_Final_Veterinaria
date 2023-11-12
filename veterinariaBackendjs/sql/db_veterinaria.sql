@@ -272,11 +272,11 @@ DELIMITER ;
 
 Drop procedure if exists Actualizar_Credenciales;
 DELIMITER &&  
-CREATE PROCEDURE Actualizar_Credendeciales (in id varchar(30),
+CREATE PROCEDURE Actualizar_Credenciales (in Oldid varchar(30), in Newid varchar(30),
     in P_Contrasenia varchar(255),
     in P_idPersona INT)
 BEGIN    
-	 update Credenciales set Contrasenia = P_Contrasenia, idPersona = P_idPersona where Usuario = id;
+	 update Credenciales set Usuario = Newid, Contrasenia = P_Contrasenia, idPersona = P_idPersona where Usuario = Oldid;
 END &&  
 DELIMITER ;
 
@@ -292,7 +292,7 @@ Drop procedure if exists Eliminar_Credenciales;
 DELIMITER &&  
 CREATE PROCEDURE Eliminar_Credenciales (in id varchar(30))
 BEGIN    
-	 delete from Credenciales where IdMascota=id;
+	 delete from Credenciales where Usuario=id;
 END &&  
 DELIMITER ;
 
@@ -741,4 +741,4 @@ GRANT 'login_management' TO 'User_Login'@'localhost';
 */
 FLUSH PRIVILEGES;
 
-/*select * from persona;*/
+select * from persona;
