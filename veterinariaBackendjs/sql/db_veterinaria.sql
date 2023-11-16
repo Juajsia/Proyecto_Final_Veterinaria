@@ -55,12 +55,12 @@ CREATE TABLE Historia_Clinica (
     IdMascota binary(16) NOT NULL,
     IdOrden INT NULL,
     IdVeterinario INT NOT NULL,
-    IdHistorialVacunas INT NOT NULL,
     PRIMARY KEY (IdHistoria_Clinica)
 );
 
 create table Historial_Vacunas (
 	IdHistorialVacunas INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    Fecha DATE NOT NULL,
     IdVacuna INT NOT NULL,
     IdMascota binary(16) NOT NULL
 );
@@ -125,8 +125,7 @@ alter table Mascota add(
 alter table Historia_Clinica add(
 	foreign key (IdMascota) references Mascota(IdMascota),
     foreign key (IdOrden) references Orden(IdOrden),
-	foreign key (IdVeterinario) references Persona(Cedula),
-    foreign key (IdHistorialVacunas) references Historial_Vacunas(IdHistorialVacunas)
+	foreign key (IdVeterinario) references Persona(Cedula)
 );
 
 alter table Historial_Vacunas add(
@@ -363,9 +362,10 @@ Drop procedure if exists Crear_Historial_Vacunas;
 DELIMITER &&  
 CREATE PROCEDURE Crear_Historial_Vacunas (
     in IdVacuna INT,
+    in Fecha DATE,
     in IdMascota varchar(36))
 BEGIN    
-	 insert into Historial_Vacunas (IdVacuna, IdMascota) values(IdVacuna, UUID_TO_BIN(IdMascota));
+	 insert into Historial_Vacunas (IdVacuna, Fecha, IdMascota) values(IdVacuna, Fecha, UUID_TO_BIN(IdMascota));
 END &&  
 DELIMITER ;
 
@@ -373,10 +373,11 @@ Drop procedure if exists Actualizar_Historial_Vacunas;
 DELIMITER &&  
 CREATE PROCEDURE Actualizar_Historial_Vacunas (
 	in id INT,
+    in P_Fecha DATE,
 	in P_IdVacuna INT,
     in P_IdMascota varchar(36))
 BEGIN    
-	 update Historia_Clinica set IdVacuna = P_IdVacuna, IdMascota = UUID_TO_BIN(P_IdMascota) where IdHistoria_Clinica = id;
+	 update Historial_Vacunas set Fecha = P_Fecha, IdVacuna = P_IdVacuna, IdMascota = UUID_TO_BIN(P_IdMascota) where IdHistorialVacunas = id;
 END &&
 DELIMITER ;
 
@@ -384,7 +385,7 @@ Drop procedure if exists Consultar_Historial_Vacunas;
 DELIMITER &&  
 CREATE PROCEDURE Consultar_Historial_Vacunas (in id INT)
 BEGIN    
-	 select IdHistoria_Clinica, IdVacuna, UUID_TO_BIN(IdMascota) where IdHistoria_Clinica = id;
+	 select IdHistorialVacunas, Fecha, IdVacuna, UUID_TO_BIN(IdMascota) where IdHistorialVacunas = id;
 END &&  
 DELIMITER ;
 
@@ -392,7 +393,7 @@ Drop procedure if exists Eliminar_Historial_Vacunas;
 DELIMITER &&  
 CREATE PROCEDURE Eliminar_Historial_Vacunas (in id INT)
 BEGIN    
-	 delete from Historia_Clinica where IdHistoria_Clinica = id;
+	 delete from Historial_Vacunas where IdHistorialVacunas = id;
 END &&  
 DELIMITER ;
 

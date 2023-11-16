@@ -2,12 +2,12 @@ import z from 'zod'
 
 const personSchema = z.object({
   cedula: z.number().int().positive(),
-  primerNombre: z.string(),
-  segundoNombre: z.string().nullable(),
-  primerApellido: z.string(),
-  segundoApellido: z.string(),
+  Primer_nombre: z.string(),
+  Segundo_nombre: z.string().nullable(),
+  Primer_Apellido: z.string(),
+  Segundo_Apellido: z.string(),
   edad: z.number().int().positive(),
-  idRol: z.number().int().min(1).max(4)
+  IdRol: z.number().int().min(1).max(4)
 })
 
 export function validatePerson (object) {

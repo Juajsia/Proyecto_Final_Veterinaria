@@ -55,8 +55,8 @@ export class PersonModel {
       if (person.length > 0) {
         return { err: 'usuario ya registrado' }
       } else {
-        const { primerNombre, segundoNombre, primerApellido, segundoApellido, edad, idRol } = data
-        await connection.query('call Create_Persona(?, ?, ?, ?, ?, ?, ?);', [cedula, primerNombre, segundoNombre, primerApellido, segundoApellido, edad, idRol])
+        const { Primer_nombre: primerNombre, Segundo_nombre: segundoNombre, Primer_Apellido: primerApellido, Segundo_Apellido: segundoApellido, edad, IdRol } = data
+        await connection.query('call Create_Persona(?, ?, ?, ?, ?, ?, ?);', [cedula, primerNombre, segundoNombre, primerApellido, segundoApellido, edad, IdRol])
         return { msg: `usuario ${primerNombre} registrado con exito` }
       }
     } catch (error) {

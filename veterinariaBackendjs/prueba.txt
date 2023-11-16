@@ -1,0 +1,22 @@
+entrada para historial_clinico
+{
+    motivo: 
+    sinto:
+    diag:
+    proc:
+    medAler:
+    NomMasc:
+    idDueño:
+    idOrden?:
+    IdVet:
+    NomVac?: []
+}
+
+entrada para orden
+{
+    NomMasc:
+    idDueño:
+    Medicamentos: [qqq,q222]
+    Dosis: [qqq,q222] 
+}
+
