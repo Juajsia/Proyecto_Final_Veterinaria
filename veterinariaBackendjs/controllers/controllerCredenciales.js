@@ -21,7 +21,6 @@ export class CredController {
   }
 
   create = async (req, res) => {
-    // valuserar data
     const result = validateCred(req.body)
 
     if (result.error) {
