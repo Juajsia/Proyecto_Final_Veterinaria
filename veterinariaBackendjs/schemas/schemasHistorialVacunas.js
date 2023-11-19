@@ -1,9 +1,10 @@
 import z from 'zod'
 
 const historialVacunaSchema = z.object({
-  Fecha: z.date(),
-  IdVacuna: z.number().int().positive(),
-  IdMascota: z.string().refine((value) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value), 'La contraseña no es válida')
+  Fecha: z.string().refine((value) => /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.test(value), 'Fecha no valida').optional(),
+  Vacuna: z.string(),
+  IdVacuna: z.number().positive().int().optional(),
+  IdMascota: z.string().refine((value) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value), 'id Mascota no es válida')
 })
 
 export function validateHistorialVacunas (object) {

@@ -298,7 +298,6 @@ DELIMITER ;
 Drop procedure if exists Crear_Historia_Clinica;
 DELIMITER &&  
 CREATE PROCEDURE Crear_Historia_Clinica (
-    in Fecha DATE,
     in Motivo VARCHAR(200),
     in Sintomatologia TINYTEXT,
     in Diagnostico TEXT,
@@ -306,17 +305,15 @@ CREATE PROCEDURE Crear_Historia_Clinica (
     in MedicamentosAlergia VARCHAR(100),
     in IdMascota varchar(36),
     in IdOrden INT,
-    in IdVeterinario INT,
-    in IdHistorialVacunas INT)
+    in IdVeterinario INT)
 BEGIN    
 	 insert into Historia_Clinica 
      (Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, Medicamento, Dosis,
      Vacuna, MedicamentosAlergia, DetalleProcedimiento, IdMascota, IdOrden, IdVeterinario)
-     values(Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, Medicamento, Dosis,
-     Vacuna, MedicamentosAlergia, DetalleProcedimiento, UUID_TO_BIN(IdMascota), IdOrden, IdVeterinario);
+     values( (select NOW()), Motivo, Sintomatologia, Diagnostico, Procedimiento, Medicamento, Dosis,
+     Vacuna, MedicamentosAlergia, DetalleProcedimiento, UUID_TO_BIN(IdMascota), IdOrden);
 END &&  
 DELIMITER ;
-
 
 Drop procedure if exists Actualizar_Historia_Clinica;
 DELIMITER &&  
@@ -362,10 +359,9 @@ Drop procedure if exists Crear_Historial_Vacunas;
 DELIMITER &&  
 CREATE PROCEDURE Crear_Historial_Vacunas (
     in IdVacuna INT,
-    in Fecha DATE,
     in IdMascota varchar(36))
 BEGIN    
-	 insert into Historial_Vacunas (IdVacuna, Fecha, IdMascota) values(IdVacuna, Fecha, UUID_TO_BIN(IdMascota));
+	 insert into Historial_Vacunas (IdVacuna, Fecha, IdMascota) values(IdVacuna, (select NOW()), UUID_TO_BIN(IdMascota));
 END &&  
 DELIMITER ;
 
@@ -385,7 +381,7 @@ Drop procedure if exists Consultar_Historial_Vacunas;
 DELIMITER &&  
 CREATE PROCEDURE Consultar_Historial_Vacunas (in id INT)
 BEGIN    
-	 select IdHistorialVacunas, Fecha, IdVacuna, UUID_TO_BIN(IdMascota) where IdHistorialVacunas = id;
+	 select IdHistorialVacunas, Fecha, IdVacuna, BIN_TO_UUID(IdMascota) IdMascota from historial_vacunas where IdHistorialVacunas = id;
 END &&  
 DELIMITER ;
 
@@ -491,9 +487,9 @@ BEGIN
 END &&
 DELIMITER ;
 
-Drop procedure if exists Consultar_Historial_Vacunas;
+Drop procedure if exists Consultar_Orden_Medicamento;
 DELIMITER &&  
-CREATE PROCEDURE Consultar_Historial_Vacunas (in P_IdOrden INT)
+CREATE PROCEDURE Consultar_Orden_Medicamento (in P_IdOrden INT)
 BEGIN    
 	 select * from Historial_Vacunas where IdOrden = P_IdOrden;
 END &&  
@@ -739,5 +735,3 @@ GRANT 'Vendedor' TO 'User_Vendedor'@'localhost';
 GRANT 'login_management' TO 'User_Login'@'localhost';
 */
 FLUSH PRIVILEGES;
-
-select * from persona;
