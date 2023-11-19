@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import mysql from 'mysql2/promise'
+import { HistorialVacunaModel } from './modelHistorialVacuna.js'
 
 const DEFAULT_CONFIG = {
   host: 'localhost',
@@ -19,7 +20,7 @@ try {
 export class MedicalHistoryModel {
   static async getAll () {
     try {
-      const [medicalHistory] = await connection.query('select * from historia_clinica;')
+      const [medicalHistory] = await connection.query('select IdHistoria_Clinica, Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, BIN_TO_UUID(IdMascota) IdMascota, IdOrden, IdVeterinario from historia_clinica;')
 
       if (medicalHistory.length === 0) {
         return { msg: 'No hay registros en el historial clinico' }
@@ -50,35 +51,50 @@ export class MedicalHistoryModel {
 
   static async create ({ data }) {
     try {
-      const { id } = data
-      const medicalHistory = await this.getById({ id })
-      if (medicalHistory.length > 0) {
-        return { err: 'Registro del historial clinico ya existe' }
-      } else {
-        const { motivo, sintomatologia, diagnostico, procedimiento, medicamentosAlergia, NombreMascota, cedulaDueño, IdOrden, idVeterinario } = data
-        // validar idOrden, consultar id mascota, validar procedimiento vacuna
+      // const { id } = data
+      // const medicalHistory = await this.getById({ id })
+      // if (medicalHistory.length > 0) {
+      //   return { err: 'Registro del historial clinico ya existe' }
+      // } else {
+      const { Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, NombreMascota, CedulaDueño, IdVeterinario } = data
+      let { IdOrden } = data
+      // validar idOrden, consultar id mascota, validar procedimiento vacuna
+      if (IdOrden) { // si hay orden
         const [orden] = await connection.query('call Consultar_Orden(?);', [IdOrden])
-        if (orden[0].length !== 0) { // validar idOrden
+        if (!orden[0]) { // validar idOrden
           return {
             typeErr: 1,
             err: 'Orden ya existe'
           }
         }
-        const [Mascota] = await connection.query('select BIN_TO_UUID(IdMascota) from mascota where Nombre = ? and IdDuenio = ?;', [NombreMascota, cedulaDueño])
-        if (Mascota[0].length === 0) { // validar si hay mascota
-          return {
-            typeErr: 1,
-            err: 'Mascota no existe'
-          }
-        }
-        const { IdMascota } = Mascota
-        await connection.query('call Crear_Historia_Clinica(?, ?, ?, ?, ?, ?, ?, ?);', [motivo, sintomatologia, diagnostico, procedimiento, medicamentosAlergia, IdMascota, IdOrden, idVeterinario])
-        // crear registro historial de vacunas si es el caso
-        return { msg: 'registro del historial clinico registrado con exito' }
+      } else {
+        IdOrden = null
       }
+      const [Mascota] = await connection.query('select BIN_TO_UUID(IdMascota) IdMascota from mascota where Nombre = ? and IdDuenio = ?;', [NombreMascota, CedulaDueño])
+      if (!Mascota[0]) { // validar si hay mascota
+        return {
+          typeErr: 1,
+          err: 'Mascota no existe'
+        }
+      }
+      const { IdMascota } = Mascota[0]
+      console.log(Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario)
+      await connection.query('call Crear_Historia_Clinica(?, ?, ?, ?, ?, ?, ?, ?);', [Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario])
+      // crear registro historial de vacunas si es el caso
+      const { NombreVacunas } = data
+      if (NombreVacunas) {
+        NombreVacunas.forEach(async element => {
+          await HistorialVacunaModel.create({
+            Vacuna: element,
+            IdMascota
+          })
+        })
+      }
+      return { msg: 'registro del historial clinico registrado con exito' }
+      // }
     } catch (error) {
       return {
-        err: 'Error creando medicalHistorya',
+        err: 'Error creando historial clinico',
         msg: error
       }
     }
@@ -88,14 +104,14 @@ export class MedicalHistoryModel {
     try {
       const medicalHistory = await this.getById({ id })
       if (medicalHistory.err) {
-        return { err: 'usuario no está registrado' }
+        return { err: 'registro del historial clinico no registrado' }
       } else {
-        await connection.query('call Eliminar_medicalHistorya(?);', [id])
-        return { msg: 'usuario eliminado con exito' }
+        await connection.query('call Eliminar_Historia_Clinica(?);', [id])
+        return { msg: 'registro del historial clinico eliminado con exito' }
       }
     } catch (error) {
       return {
-        err: 'Error eliminado medicalHistorya'
+        err: 'Error eliminado registro del historial clinico'
       }
     }
   }
@@ -104,16 +120,17 @@ export class MedicalHistoryModel {
     try {
       const medicalHistory = await this.getById({ id })
       if (medicalHistory.err) {
-        return { err: 'usuario no está registrado' }
+        return { err: 'registro del historial clinico no registrado' }
       } else {
-        const usuarioAct = { ...medicalHistory[0], ...data }
-        const { Primer_nombre: primerNombre, Segundo_nombre: segundoNombre, Primer_Apellido: primerApellido, Segundo_Apellido: segundoApellido, edad, IdRol } = usuarioAct
-        await connection.query('call Actualizar_medicalHistorya(?, ?, ?, ?, ?, ?, ?);', [id, primerNombre, segundoNombre, primerApellido, segundoApellido, edad, IdRol])
-        return { msg: 'usuario actualizado con exito' }
+        const regAct = { ...medicalHistory[0], ...data }
+        const { Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario } = regAct
+        console.log(Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario)
+        await connection.query('call Actualizar_Historia_Clinica(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [id, Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario])
+        return { msg: 'registro del historial clinico actualizado con exito' }
       }
     } catch (error) {
       return {
-        err: 'Error actualizando medicalHistorya'
+        err: 'Error actualizando registro del historial clinico'
       }
     }
   }
