@@ -123,7 +123,7 @@ export class CredModel {
       }
       const [rol] = await connection.query('select IdRol from Persona where cedula = ?;', [cred[0].idPersona])
       const token = createToken({ data: { Usuario, Rol: rol[0].IdRol } })
-      return { succes: 'Login Correcto', token }
+      return { succes: 'Login Correcto', token, Rol: rol[0].IdRol }
     } catch (error) {
       return {
         err: 'Error buscando credenciales',

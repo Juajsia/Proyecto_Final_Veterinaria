@@ -24,8 +24,9 @@ export class LoginComponent {
     if (this.validateForm()) {
       const user:User = {Usuario: this.Usuario, Contrasenia: this.Contrasenia}
     this._userService.login(user).subscribe({
-      next: (data) => {   
+      next: (data) => {
         localStorage.setItem('token', data.token)
+        localStorage.setItem('rol', data.Rol)
         this.router.navigate([''])
       },
       error: (e: HttpErrorResponse) => {

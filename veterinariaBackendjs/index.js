@@ -22,7 +22,7 @@ app.use('/api/pet', validateToken, validateRolToken([1, 2]), createPetRouter({ P
 app.use('/api/person', validateToken, validateRolToken([1]), createPersonRouter({ PersonModel }))
 app.use('/api/medicalHistory', createMedicalHistoryRouter({ MedicalHistoryModel }))
 app.use('/api/historialVacuna', validateToken, validateRolToken([1, 2]), createHistorialVacunasRouter({ HistorialVacunaModel }))
-app.use('/api/user', validateToken, validateRolToken([1, 2]), createCredRouter({ CredModel }))
+app.use('/api/user', createCredRouter({ CredModel }))
 
 const PORT = process.env.PORT ?? 3000
 

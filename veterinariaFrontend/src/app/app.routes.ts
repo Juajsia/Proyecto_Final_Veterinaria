@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MascotaComponent } from './pages/mascota/mascota.component';
+import { loginGuard, rolVeterinario } from './guards/login.guard';
 
 export const routes: Routes = [{
     title: 'Home',
@@ -19,6 +20,6 @@ export const routes: Routes = [{
 },{
     title: 'Mascota',
     path: 'mascota',
-    component: MascotaComponent
+    component: MascotaComponent,
+    canActivate: [loginGuard, rolVeterinario]
 }];
-    

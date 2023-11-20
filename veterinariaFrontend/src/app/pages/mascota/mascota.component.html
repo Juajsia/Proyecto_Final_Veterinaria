@@ -4,8 +4,10 @@
     <section class="acciones">
         <h2 id="titulo">Mascotas</h2>
         <div>
-            <button class="btn" (click)="Buscar()">Buscar</button>
-            <button class="btn">Agregar</button>
+            @if (!buscar) {
+            <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
+            }
+            <button class="btn" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar Mascota</button>
         </div>
         <!-- <input type="button" class="input" id="agregar" placeholder="Agregar"> -->
     </section>
@@ -14,7 +16,7 @@
         <form action="" id="form-buscar">
             <input type="text" class="params" placeholder="Ingrese el nombre">
             <input type="text" class="params" placeholder="Ingrese la cedula del dueño">
-            <button type="button" class="btn">Buscar</button>
+            <button class="btn" type="button"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
         </form>
     </section>
     }
@@ -44,16 +46,12 @@
                     <td>20</td>
                     <td>1234</td>
                     <td class="btns">
-                        <a href="#">
-                            <span class="material-symbols-outlined">
-                                edit
-                            </span>
-                        </a>
-                        <a href="#">
-                            <span class="material-symbols-outlined btnTrash">
-                                delete
-                            </span>
-                        </a>
+                        <button class="Edit">
+                            <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                        </button>
+                        <button class="Delete">
+                            <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+                        </button>
                     </td>
                 </tr>
                 <tr>
@@ -66,16 +64,12 @@
                     <td>20</td>
                     <td>1234</td>
                     <td class="btns">
-                        <a href="#">
-                            <span class="material-symbols-outlined">
-                                edit
-                            </span>
-                        </a>
-                        <a href="#">
-                            <span class="material-symbols-outlined btnTrash">
-                                delete
-                            </span>
-                        </a>
+                        <button class="Edit">
+                            <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                        </button>
+                        <button class="Delete">
+                            <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+                        </button>
                     </td>
                 </tr>
 

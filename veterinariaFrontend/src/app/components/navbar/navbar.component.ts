@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { loginGuard } from '../../guards/login.guard';
 
 @Component({
   selector: 'app-navbar',
@@ -10,5 +11,15 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  logo = '../../../assets/Perfil.png'
+  loginStatus = loginGuard()
+  router = inject(Router)
+  rol = localStorage.getItem('rol')
+
+  logOut(){
+    this.loginStatus = false
+    this.rol = ''
+    localStorage.removeItem('token')
+    localStorage.removeItem('rol')
+    this.router.navigate([''])
+  }
 }
