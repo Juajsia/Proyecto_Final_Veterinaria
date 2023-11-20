@@ -3,6 +3,27 @@
     font-family: "Open sans", sans-serif;
 }
 
+.btn-login{
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    background-color: #ffff;
+    color: #1b3039;
+    border-color: #1b3039;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    transition: all .5s ease;
+}
+
+.btn-login:hover {
+    background-color: #ffbc03;
+    color: #ffff;
+    border-color: #ffff;
+    transform: scale(1.1);
+}
+
 nav {
     position: fixed;
     z-index: 1;

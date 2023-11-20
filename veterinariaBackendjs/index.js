@@ -1,5 +1,6 @@
 import express from 'express'
 import 'dotenv/config'
+import cors from 'cors'
 import { createPersonRouter } from './routes/routerPerson.js'
 import { createPetRouter } from './routes/routerPet.js'
 import { PersonModel } from './models/modelPerson.js'
@@ -14,7 +15,7 @@ import { createHistorialVacunasRouter } from './routes/routerHistorialVacuna.js'
 import { HistorialVacunaModel } from './models/modelHistorialVacuna.js'
 
 const app = express()
-
+app.use(cors())
 app.use(express.json())
 app.use('/api/person', validateToken, validateRolToken([1]), createPersonRouter({ PersonModel }))
 app.use('/api/pet', validateToken, validateRolToken([1, 2]), createPetRouter({ PetModel }))
