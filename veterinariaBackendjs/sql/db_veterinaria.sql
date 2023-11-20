@@ -308,10 +308,8 @@ CREATE PROCEDURE Crear_Historia_Clinica (
     in IdVeterinario INT)
 BEGIN    
 	 insert into Historia_Clinica 
-     (Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, Medicamento, Dosis,
-     Vacuna, MedicamentosAlergia, DetalleProcedimiento, IdMascota, IdOrden, IdVeterinario)
-     values( (select NOW()), Motivo, Sintomatologia, Diagnostico, Procedimiento, Medicamento, Dosis,
-     Vacuna, MedicamentosAlergia, DetalleProcedimiento, UUID_TO_BIN(IdMascota), IdOrden);
+     (Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario)
+     values( (select NOW()), Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, UUID_TO_BIN(IdMascota), IdOrden, IdVeterinario);
 END &&  
 DELIMITER ;
 
@@ -327,13 +325,11 @@ CREATE PROCEDURE Actualizar_Historia_Clinica (
     in P_MedicamentosAlergia VARCHAR(100),
     in P_IdMascota varchar(36),
     in P_IdOrden INT,
-    in P_IdVeterinario INT,
-    in P_IdHistorialVacunas INT)
+    in P_IdVeterinario INT)
 BEGIN    
 	 update Historia_Clinica set Fecha = P_Fecha, Motivo = P_Motivo, Sintomatologia = P_Sintomatologia, 
-     Diagnostico = P_Diagnostico ,Procedimiento = P_Procedimiento, Medicamento = p_Medicamento, Dosis = P_Dosis, 
-     Vacuna = P_Vacuna, MedicamentosAlergia = P_MedicamentosAlergia, DetalleProcedimiento = P_DetalleProcedimiento, 
-     Anulacion = P_Anulacion, IdMascota = UUID_TO_BIN(P_IdMascota),IdOrden = P_IdOrden, IdVeterinario = P_IdVeterinario, IdHistorialVacunas = P_IdHistorialVacunas where IdHistoria_Clinica = id;
+     Diagnostico = P_Diagnostico ,Procedimiento = P_Procedimiento, MedicamentosAlergia = P_MedicamentosAlergia, 
+     IdMascota = UUID_TO_BIN(P_IdMascota),IdOrden = P_IdOrden, IdVeterinario = P_IdVeterinario where IdHistoria_Clinica = id;
 END &&
 DELIMITER ;
 
@@ -341,7 +337,7 @@ Drop procedure if exists Consultar_Historia_Clinica;
 DELIMITER &&  
 CREATE PROCEDURE Consultar_Historia_Clinica (in id INT)
 BEGIN    
-	 select IdHistoria_Clinica, Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, Medicamento, Dosis, Vacuna, MedicamentosAlergia, DetalleProcedimiento, BIN_TO_UUID(IdMascota), IdOrden, IdVeterinario 
+	 select IdHistoria_Clinica, Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, BIN_TO_UUID(IdMascota) IdMascota, IdOrden, IdVeterinario 
      from historia_clinica where IdHistoria_Clinica = id;
 END &&  
 DELIMITER ;
