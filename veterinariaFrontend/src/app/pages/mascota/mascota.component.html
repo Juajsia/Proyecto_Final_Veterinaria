@@ -1,0 +1,89 @@
+<app-navbar></app-navbar>
+
+<main>
+    <section class="acciones">
+        <h2 id="titulo">Mascotas</h2>
+        <div>
+            <button class="btn" (click)="Buscar()">Buscar</button>
+            <button class="btn">Agregar</button>
+        </div>
+        <!-- <input type="button" class="input" id="agregar" placeholder="Agregar"> -->
+    </section>
+    @if (buscar) {
+    <section class="busqueda">
+        <form action="" id="form-buscar">
+            <input type="text" class="params" placeholder="Ingrese el nombre">
+            <input type="text" class="params" placeholder="Ingrese la cedula del dueño">
+            <button type="button" class="btn">Buscar</button>
+        </form>
+    </section>
+    }
+    <section class="contenido">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Especie</th>
+                    <th>Raza</th>
+                    <th>Color</th>
+                    <th>Tamaño</th>
+                    <th>Peso</th>
+                    <th>Cédula del dueño</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Manolo</td>
+                    <td>12</td>
+                    <td>Pájaro</td>
+                    <td>aaaaaa</td>
+                    <td>azul</td>
+                    <td>123</td>
+                    <td>20</td>
+                    <td>1234</td>
+                    <td class="btns">
+                        <a href="#">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </a>
+                        <a href="#">
+                            <span class="material-symbols-outlined btnTrash">
+                                delete
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Manolo</td>
+                    <td>12</td>
+                    <td>Pájaro</td>
+                    <td>aaaaaa</td>
+                    <td>azul</td>
+                    <td>123</td>
+                    <td>20</td>
+                    <td>1234</td>
+                    <td class="btns">
+                        <a href="#">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </a>
+                        <a href="#">
+                            <span class="material-symbols-outlined btnTrash">
+                                delete
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Puedes agregar más filas según sea necesario -->
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+<app-footer></app-footer>
