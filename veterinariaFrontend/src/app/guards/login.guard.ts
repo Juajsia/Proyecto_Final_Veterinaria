@@ -21,3 +21,14 @@ export const rolVeterinario = () => {
         return false
     }
 }
+
+export const rolAdmin = () => {
+    const rol = localStorage.getItem('rol')
+    const router = inject(Router)
+    if(rol === '1') {
+        return true
+    } else {
+        router.navigate([''])
+        return false
+    }
+}
