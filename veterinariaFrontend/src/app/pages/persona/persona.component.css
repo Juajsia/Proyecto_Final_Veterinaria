@@ -6,7 +6,10 @@
 main {
     position: relative;
     top: 85px;
-    height: 100vh;
+}
+
+.separador{
+    margin-bottom: 50px;
 }
 
 table {
