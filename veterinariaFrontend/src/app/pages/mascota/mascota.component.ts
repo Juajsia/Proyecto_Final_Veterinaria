@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { MascotaService } from '../../services/mascota.service';
 import { Pet } from '../../interfaces/pet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mascota',
@@ -31,8 +32,13 @@ export class MascotaComponent {
       this.listPets = data
     })
   }
+  private router: Router = inject(Router)
 
   Buscar(){
     this.buscar = true
+  }
+
+  mostrarForm(){
+    this.router.navigate(['mascota/formulario'])
   }
 }
