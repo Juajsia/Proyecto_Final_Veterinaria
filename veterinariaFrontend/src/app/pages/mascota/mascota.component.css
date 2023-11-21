@@ -50,10 +50,6 @@ button {
     gap: 10px;
 }
 
-.btnTrash {
-    color: red;
-}
-
 .acciones {
     padding: 20px;
     display: flex;
