@@ -9,7 +9,7 @@
             <li><a href="#">Consultar historia clínica</a></li>
             }
             @if (rol == '1') {
-            <li><a href="#">Administrar Personas</a></li>
+            <li><a routerLink="/persona">Administrar Personas</a></li>
             }
 
             <li><a routerLink="/about">Sobre nosotros</a></li>
@@ -20,7 +20,7 @@
         <a class="btn-login" routerLink="/login">Iniciar Sesión</a>
         }
         @else {
-        <button class="btn-login" (click)="logOut()">Cerrar Sesión</button>
+        <button class="btn-login" id="close" (click)="logOut()">Cerrar Sesión</button>
         }
     </nav>
 </div>

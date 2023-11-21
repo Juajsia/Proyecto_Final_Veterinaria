@@ -6,7 +6,10 @@
 main {
     position: relative;
     top: 85px;
-    height: 100vh;
+}
+
+.separador{
+    margin-bottom: 50px;
 }
 
 table {
@@ -48,6 +51,10 @@ button {
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+.btnTrash {
+    color: red;
 }
 
 .acciones {

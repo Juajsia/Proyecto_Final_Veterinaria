@@ -1,0 +1,177 @@
+<app-navbar></app-navbar>
+<main>
+    <div class="separador">
+        <section class="acciones">
+            <h2 id="titulo">Administradores</h2>
+            <div>
+                @if (!buscar) {
+                <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
+                }
+                <button class="btn" (click)="mostrarForm()" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
+                    Persona</button>
+            </div>
+            <!-- <input type="button" class="input" id="agregar" placeholder="Agregar"> -->
+        </section>
+        @if (buscar) {
+        <section class="busqueda">
+            <form action="" id="form-buscar">
+                <input type="text" class="params" placeholder="Ingrese la cedula del dueño">
+                <button class="btn" type="button"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
+            </form>
+        </section>
+        }
+        <section class="contenido">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Edad</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Manolo</td>
+                        <td>12</td>
+                        <td>Pájaro</td>
+                        <td>aaaaaa</td>
+                        <td>azul</td>
+                        <td>123</td>
+                        <td class="btns">
+                            <button class="Edit">
+                                <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                            </button>
+                            <button class="Delete">
+                                <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <div class="separador">
+        <section class="acciones">
+            <h2 id="titulo">Veterinarios</h2>
+        </section>
+        <section class="contenido">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Edad</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Manolo</td>
+                        <td>12</td>
+                        <td>Pájaro</td>
+                        <td>aaaaaa</td>
+                        <td>azul</td>
+                        <td>123</td>
+                        <td class="btns">
+                            <button class="Edit">
+                                <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                            </button>
+                            <button class="Delete">
+                                <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <div class="separador">
+        <section class="acciones">
+            <h2 id="titulo">Vendedores</h2>
+        </section>
+        <section class="contenido">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Edad</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Manolo</td>
+                        <td>12</td>
+                        <td>Pájaro</td>
+                        <td>aaaaaa</td>
+                        <td>azul</td>
+                        <td>123</td>
+                        <td class="btns">
+                            <button class="Edit">
+                                <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                            </button>
+                            <button class="Delete">
+                                <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <div class="separador">
+        <section class="acciones">
+            <h2 id="titulo">Personas</h2>
+        </section>
+        <section class="contenido">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Edad</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Manolo</td>
+                        <td>12</td>
+                        <td>Pájaro</td>
+                        <td>aaaaaa</td>
+                        <td>azul</td>
+                        <td>123</td>
+                        <td class="btns">
+                            <button class="Edit">
+                                <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                            </button>
+                            <button class="Delete">
+                                <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+</main>
+
+<app-footer></app-footer>
