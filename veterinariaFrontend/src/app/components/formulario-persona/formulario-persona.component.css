@@ -57,14 +57,14 @@ form+p {
 
 
 input,
-button {
+button,select{
     border: unset;
     border-radius: 4px;
     padding: 15px 30px;
     font-size: large;
 }
 
-input {
+input,select {
     background-color: #f7f7f700;
     border-bottom: 1px solid #4e4f5183;
     border-radius: 5px;

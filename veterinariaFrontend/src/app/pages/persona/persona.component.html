@@ -7,7 +7,7 @@
                 @if (!buscar) {
                 <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
                 }
-                <button class="btn" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
+                <button class="btn" (click)="mostrarForm()" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
                     Persona</button>
             </div>
             <!-- <input type="button" class="input" id="agregar" placeholder="Agregar"> -->

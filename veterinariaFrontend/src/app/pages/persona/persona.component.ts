@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-persona',
@@ -18,8 +19,13 @@ export class PersonaComponent {
   faPlus = faPlus
   lupa = faMagnifyingGlass
   buscar = false
+  private router: Router = inject(Router)
 
   Buscar(){
     this.buscar = true
+  }
+
+   mostrarForm(){
+    this.router.navigate(['persona/formulario'])
   }
 }
