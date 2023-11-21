@@ -733,4 +733,14 @@ GRANT 'login_management' TO 'User_Login'@'localhost';
 FLUSH PRIVILEGES;
 
 insert into persona values(1234, 'Admin', 'Admin', 'Admin', 'Admin', 100, 1);
+insert into persona values(1111, 'Juan', 'Jose', 'Estrada', 'Velez', 20, 2);
+insert into persona values(4321, 'Isac', '', 'Cortes', 'Buitrago', 19, 3);
+insert into persona values(5412, 'Juan', 'pablo', 'Adams', 'Parra', 21, 4);
+insert into persona values(6666, 'Emmanuel', '', 'Bolivar', 'Marin', 20, 2);
+
+insert into mascota values(UUID_TO_BIN(UUID()), 'Manolo', 4, 'Pajaro', 'Pajaro', 'Cafe', 20, 5, 6666);
+insert into mascota values(UUID_TO_BIN(UUID()), 'Risitas', 10, 'Perro', 'Hijueputa', 'Negro', 20, 5, 4321);
+insert into mascota values(UUID_TO_BIN(UUID()), 'Athenea', 2, 'Gato', 'casita', 'gris', 40, 8, 5412);
+insert into mascota values(UUID_TO_BIN(UUID()), 'Kiara', 3, 'Perro', 'beagle', 'Naranja/negro', 40, 15, 1111);
+
 insert into credenciales values('Admin1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1234); /* password: P@ssw0rd */
