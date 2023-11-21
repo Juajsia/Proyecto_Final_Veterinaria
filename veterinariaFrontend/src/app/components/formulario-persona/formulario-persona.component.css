@@ -1,0 +1,103 @@
+h1 {
+    margin: 30px;
+    font-size: 2.3rem;
+    letter-spacing: 0.06em;
+    color: #142127;
+    font-weight: bold;
+}
+
+section {
+    background: rgb(255, 246, 77);
+    background: linear-gradient(90deg, rgba(255, 246, 77, 1) 0%, rgba(90, 167, 200, 1) 70%);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100svh;
+    font-size: large;
+}
+
+
+.from-container {
+    border: 1px solid rgba(0, 0, 0, 0.459);
+    padding: 10px;
+    background-color: #f7f7f78a;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+label {
+    align-self: self-start;
+    color: #3c3c3c;
+    font-size: large;
+    letter-spacing: 0.8px;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+form+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+input,
+button {
+    border: unset;
+    border-radius: 4px;
+    padding: 15px 30px;
+    font-size: large;
+}
+
+input {
+    background-color: #f7f7f700;
+    border-bottom: 1px solid #4e4f5183;
+    border-radius: 5px;
+    min-width: 400px;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    justify-content: center;
+    margin-top: 20px;
+    background-color: transparent;
+    color: #1b3039;
+    border: 1px solid rgba(0, 0, 0, 0.459);
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    transition: all .5s ease;
+}
+
+#cancel:hover {
+    background-color: #b14242;
+    color: #ffff;
+    border-color: #ffff;
+}
+
+#save:hover {
+    background-color: #4fb142;
+    color: #ffff;
+    border-color: #ffff;
+    transform: scale(1.05);
+}

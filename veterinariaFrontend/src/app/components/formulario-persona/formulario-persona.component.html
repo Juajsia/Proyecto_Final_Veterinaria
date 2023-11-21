@@ -1,1 +1,35 @@
-<p>formulario-persona works!</p>
+<section>
+    <article>
+        <div class="from-container">
+            <h1>Formulario</h1>
+            <form id="form" action="/login" method="post">
+                <div class="group">
+                    <label for="cedula" class="form-input">Cedula:</label>
+                    <input type="number" id="cedula" class="form-input" placeholder="Ingrese la Cedula" required>
+                    <label for="1ernombre" class="form-input">Primer Nombre:</label>
+                    <input type="text" id="1ernombre" class="form-input" placeholder="Ingrese su primer nombre" required>
+                    <label for="2donombre" class="form-input">Especie:</label>
+                    <input type="text" id="2donombre" class="form-input" placeholder="Ingrese la especie" required>
+                </div>
+                <div class="group">
+                    <label for="1erapellido" class="form-input">Raza:</label>
+                    <input type="text" id="1erapellido" class="form-input" placeholder="Ingrese la raza" required>
+                    <label for="2doapellido" class="form-input">Color:</label>
+                    <input type="text" id="2doapellido" class="form-input" placeholder="Ingrese el color" required>
+                    <label for="tamaño" class="form-input">Tamaño:</label>
+                    <select name="select">
+                        <option value="value1">Admin</option>
+                        <option value="value2">Veterinario</option>
+                        <option value="value3"selected></option>>Vendedor</option>
+                        <option value="value4">Dueño</option>
+                      </select>
+                    
+                </div>
+            </form>
+            <div class="botones">
+                <button class="btn" id="cancel"><fa-icon [icon]="cancelar"></fa-icon> Cancelar </button>
+                <button class="btn" id="save"><fa-icon [icon]="guardar"></fa-icon> Guardar </button>
+            </div>
+        </div>
+    </article>
+</section>
