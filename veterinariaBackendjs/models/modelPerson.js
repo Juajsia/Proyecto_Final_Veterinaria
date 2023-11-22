@@ -78,7 +78,8 @@ export class PersonModel {
       }
     } catch (error) {
       return {
-        err: 'Error eliminado Persona'
+        err: 'Error eliminado Persona',
+        mgs: error.message
       }
     }
   }
