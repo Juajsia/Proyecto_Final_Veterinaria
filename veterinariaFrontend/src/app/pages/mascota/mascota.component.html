@@ -4,7 +4,7 @@
     <section class="acciones">
         <h2 id="titulo">Mascotas</h2>
         <div>
-            @if (!buscar) {
+            @if (listPets.length !== 0 && !buscar) {
             <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
             }
             <button class="btn" (click)="mostrarForm()" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
@@ -21,6 +21,7 @@
         </form>
     </section>
     }
+    @if (listPets.length !== 0) {
     <section class="contenido">
         <table>
             <thead>
@@ -37,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (item of listPets; track item.IdMascota) {
+                @for (item of listPets; track item.IDMascota) {
                 <tr>
                     <td>{{item.Nombre}}</td>
                     <td>{{item.Edad}}</td>
@@ -51,34 +52,18 @@
                         <button class="Edit">
                             <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
                         </button>
-                        <button class="Delete">
+                        <button (click)="eliminarMascota(item.IDMascota!)" class="Delete">
                             <fa-icon [icon]="faTrash"></fa-icon> Eliminar
                         </button>
                     </td>
                 </tr>
                 }
-                <!-- <tr>
-                    <td>Manolo</td>
-                    <td>12</td>
-                    <td>Pájaro</td>
-                    <td>aaaaaa</td>
-                    <td>azul</td>
-                    <td>123</td>
-                    <td>20</td>
-                    <td>1234</td>
-                    <td class="btns">
-                        <button class="Edit">
-                            <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
-                        </button>
-                        <button class="Delete">
-                            <fa-icon [icon]="faTrash"></fa-icon> Eliminar
-                        </button>
-                    </td>
-                </tr> -->
             </tbody>
         </table>
     </section>
-
+    }@else {
+    <h3>No hay Mascotas Registradas</h3>
+    }
 </main>
 
 <app-footer></app-footer>

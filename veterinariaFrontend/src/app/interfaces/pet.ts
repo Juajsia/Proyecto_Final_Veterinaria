@@ -1,5 +1,5 @@
 export interface Pet {
-    IdMascota?: string,
+    IDMascota?: string,
     Nombre:string,
     Edad: number,
     Especie: string,
@@ -8,4 +8,8 @@ export interface Pet {
     Tamanio: number,
     Peso: number,
     IdDuenio: number
+}
+
+export interface msg {
+    mgs:string
 }
