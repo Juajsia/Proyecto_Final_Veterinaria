@@ -32,13 +32,14 @@ export class MascotaComponent {
       this.listPets = data
     })
   }
+
   private router: Router = inject(Router)
 
   Buscar(){
     this.buscar = true
   }
 
-  mostrarForm(){
-    this.router.navigate(['mascota/formulario'])
+  mostrarForm(id: string){
+    this.router.navigate([`mascota/formulario/${id}`])
   }
 }

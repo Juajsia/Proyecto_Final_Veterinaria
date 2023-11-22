@@ -7,7 +7,7 @@
             @if (!buscar) {
             <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
             }
-            <button class="btn" (click)="mostrarForm()" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
+            <button class="btn" (click)="mostrarForm('0')" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
                 Mascota</button>
         </div>
         <!-- <input type="button" class="input" id="agregar" placeholder="Agregar"> -->
@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (item of listPets; track item.IdMascota) {
+                @for (item of listPets; track item.IDMascota) {
                 <tr>
                     <td>{{item.Nombre}}</td>
                     <td>{{item.Edad}}</td>
@@ -48,7 +48,7 @@
                     <td>{{item.Peso}}kg</td>
                     <td>{{item.IdDuenio}}</td>
                     <td class="btns">
-                        <button class="Edit">
+                        <button class="Edit" (click)="mostrarForm(item.IDMascota!)">
                             <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
                         </button>
                         <button class="Delete">

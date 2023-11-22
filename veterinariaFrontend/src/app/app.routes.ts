@@ -26,8 +26,13 @@ export const routes: Routes = [{
     component: MascotaComponent,
     canActivate: [loginGuard, rolVeterinario]
 },{
-    title: 'Formulario',
+    title: 'FormularioAgregar',
     path: 'mascota/formulario',
+    component: FormularioMascotaComponent,
+    canActivate: [loginGuard, rolVeterinario]
+},{
+    title: 'FormularioEditar',
+    path: 'mascota/formulario/:id',
     component: FormularioMascotaComponent,
     canActivate: [loginGuard, rolVeterinario]
 },{

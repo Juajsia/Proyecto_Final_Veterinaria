@@ -1,5 +1,5 @@
 export interface Pet {
-    IdMascota?: string,
+    IDMascota?: string,
     Nombre:string,
     Edad: number,
     Especie: string,

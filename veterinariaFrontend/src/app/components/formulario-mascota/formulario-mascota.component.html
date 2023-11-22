@@ -1,41 +1,64 @@
 <section>
     <article>
         <div class="from-container">
-            <h1>Formulario</h1>
+            <h1>{{operacion}} Mascota</h1>
             <form [formGroup]="form" (ngSubmit)="agregarMascota()" id="form" action="/login" method="post">
-                <div class="group">
-                    <label for="nombre" class="form-input">Nombre:</label>
-                    <input formControlName="nombre" type="text" id="nombre" class="form-input"
-                        placeholder="Ingrese el nombre" required>
-                    @if (form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
-                    <span>Campo requerido</span>
-                    }
-                    <label for="edad" class="form-input">Edad:</label>
-                    <input formControlName="edad" type="number" id="edad" class="form-input"
-                        placeholder="Ingrese la edad" required>
-                    <label for="especie" class="form-input">Especie:</label>
-                    <input formControlName="especie" type="text" id="especie" class="form-input"
-                        placeholder="Ingrese la especie" required>
-                    <label for="raza" class="form-input">Raza:</label>
-                    <input formControlName="raza" type="text" id="raza" class="form-input" placeholder="Ingrese la raza"
-                        required>
-                </div>
-                <div class="group">
-                    <label for="color" class="form-input">Color:</label>
-                    <input formControlName="color" type="text" id="color" class="form-input"
-                        placeholder="Ingrese el color" required>
-                    <label for="tamaño" class="form-input">Tamaño:</label>
-                    <input formControlName="tamaño" type="number" id="tamaño" class="form-input"
-                        placeholder="Ingrese el tamaño" required>
-                    <label for="peso" class="form-input">Peso:</label>
-                    <input formControlName="peso" type="number" id="peso" class="form-input"
-                        placeholder="Ingrese la peso" required>
-                    <label for="cedDueno" class="form-input">Cedula del Dueño:</label>
-                    <input formControlName="cedulaDueño" type="number" id="cedDueno" class="form-input"
-                        placeholder="Ingrese la cedula del dueño" required>
+                <div class="inputs">
+                    <div class="group">
+                        <label for="nombre" class="form-input">Nombre:</label>
+                        <input formControlName="nombre" type="text" id="nombre" class="form-input"
+                            placeholder="Ingrese el nombre" required>
+                        @if (form.get('nombre')?.hasError('required') && form.get('edad')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="edad" class="form-input">Edad:</label>
+                        <input formControlName="edad" type="number" id="edad" class="form-input"
+                            placeholder="Ingrese la edad" required>
+                        @if (form.get('edad')?.hasError('required') && form.get('nombre')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="especie" class="form-input">Especie:</label>
+                        <input formControlName="especie" type="text" id="especie" class="form-input"
+                            placeholder="Ingrese la especie" required>
+                        @if (form.get('especie')?.hasError('required') && form.get('especie')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="raza" class="form-input">Raza:</label>
+                        <input formControlName="raza" type="text" id="raza" class="form-input"
+                            placeholder="Ingrese la raza" required>
+                        @if (form.get('raza')?.hasError('required') && form.get('edad')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                    </div>
+                    <div class="group">
+                        <label for="color" class="form-input">Color:</label>
+                        <input formControlName="color" type="text" id="color" class="form-input"
+                            placeholder="Ingrese el color" required>
+                        @if (form.get('color')?.hasError('required') && form.get('color')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="tamaño" class="form-input">Tamaño:</label>
+                        <input formControlName="tamaño" type="number" id="tamaño" class="form-input"
+                            placeholder="Ingrese el tamaño" required>
+                        @if (form.get('tamaño')?.hasError('required') && form.get('tamaño')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="peso" class="form-input">Peso:</label>
+                        <input formControlName="peso" type="number" id="peso" class="form-input"
+                            placeholder="Ingrese la peso" required>
+                        @if (form.get('peso')?.hasError('required') && form.get('peso')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="cedDueno" class="form-input">Cedula del Dueño:</label>
+                        <input formControlName="cedulaDueño" type="number" id="cedDueno" class="form-input"
+                            placeholder="Ingrese la cedula del dueño" required>
+                        @if (form.get('cedulaDueño')?.hasError('required') && form.get('cedulaDueño')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                    </div>
                 </div>
                 <div class="botones">
-                    <button class="btn" id="cancel"><fa-icon [icon]="cancelar"></fa-icon> Cancelar
+                    <button class="btn" id="cancel" (click)="volver()"><fa-icon [icon]="cancelar"></fa-icon> Cancelar
                     </button>
                     <button [disabled]="form.invalid" type="submit" class="btn" id="save"><fa-icon
                             [icon]="guardar"></fa-icon> Guardar </button>

@@ -5,3 +5,7 @@
     padding: 0;
     font-family: "Open sans", sans-serif;
 }
+
+button:hover {
+    cursor: pointer;
+}
