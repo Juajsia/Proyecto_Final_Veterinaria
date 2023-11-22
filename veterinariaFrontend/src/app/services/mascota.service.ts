@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Pet } from '../interfaces/pet';
+import { Pet, msg } from '../interfaces/pet';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class MascotaService {
     this.myApiUrl = 'api/pet'
    }
 
-   getAllPets(): Observable<Pet[]>{
-    return this.http.get<Pet[]>(`${this.myAppUrl}${this.myApiUrl}/`)
+   getAllPets(): Observable<Pet[] | msg>{
+    return this.http.get<Pet[] | msg>(`${this.myAppUrl}${this.myApiUrl}/`)
    }
 
    getById(id: string): Observable<Pet[]>{
@@ -28,5 +28,8 @@ export class MascotaService {
 
    updateMascota(id: string, Mascota: Pet): Observable<void>{
     return this.http.patch<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, Mascota)
+   }
+   deletePet(id:string) :Observable<void>{
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
    }
 }

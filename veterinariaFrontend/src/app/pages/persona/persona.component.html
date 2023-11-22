@@ -10,7 +10,6 @@
                 <button class="btn" (click)="mostrarForm()" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
                     Persona</button>
             </div>
-            <!-- <input type="button" class="input" id="agregar" placeholder="Agregar"> -->
         </section>
         @if (buscar) {
         <section class="busqueda">
@@ -34,22 +33,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for (item of listAdmin; track item.cedula) {
                     <tr>
-                        <td>Manolo</td>
-                        <td>12</td>
-                        <td>Pájaro</td>
-                        <td>aaaaaa</td>
-                        <td>azul</td>
-                        <td>123</td>
-                        <td class="btns">
-                            <button class="Edit">
-                                <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
-                            </button>
-                            <button class="Delete">
-                                <fa-icon [icon]="faTrash"></fa-icon> Eliminar
-                            </button>
-                        </td>
+                        <td>{{item.cedula}}</td>
+                        <td>{{item.Primer_nombre}}</td>
+                        <td>{{item.Segundo_nombre}}</td>
+                        <td>{{item.Primer_Apellido}}</td>
+                        <td>{{item.Segundo_Apellido}}</td>
+                        <td>{{item.edad}}</td>
                     </tr>
+                    }
                 </tbody>
             </table>
         </section>
@@ -73,22 +66,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for (item of listVeterinario; track item.cedula) {
                     <tr>
-                        <td>Manolo</td>
-                        <td>12</td>
-                        <td>Pájaro</td>
-                        <td>aaaaaa</td>
-                        <td>azul</td>
-                        <td>123</td>
+                        <td>{{item.cedula}}</td>
+                        <td>{{item.Primer_nombre}}</td>
+                        <td>{{item.Segundo_nombre}}</td>
+                        <td>{{item.Primer_Apellido}}</td>
+                        <td>{{item.Segundo_Apellido}}</td>
+                        <td>{{item.edad}}</td>
                         <td class="btns">
                             <button class="Edit">
                                 <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
                             </button>
-                            <button class="Delete">
+                            <button (click)="eliminarPersona(item.cedula)" class="Delete">
                                 <fa-icon [icon]="faTrash"></fa-icon> Eliminar
                             </button>
                         </td>
                     </tr>
+                    }
                 </tbody>
             </table>
         </section>
@@ -112,22 +107,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for (item of listVendedor; track item.cedula) {
                     <tr>
-                        <td>Manolo</td>
-                        <td>12</td>
-                        <td>Pájaro</td>
-                        <td>aaaaaa</td>
-                        <td>azul</td>
-                        <td>123</td>
+                        <td>{{item.cedula}}</td>
+                        <td>{{item.Primer_nombre}}</td>
+                        <td>{{item.Segundo_nombre}}</td>
+                        <td>{{item.Primer_Apellido}}</td>
+                        <td>{{item.Segundo_Apellido}}</td>
+                        <td>{{item.edad}}</td>
                         <td class="btns">
                             <button class="Edit">
                                 <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
                             </button>
-                            <button class="Delete">
+                            <button (click)="eliminarPersona(item.cedula)" class="Delete">
                                 <fa-icon [icon]="faTrash"></fa-icon> Eliminar
                             </button>
                         </td>
                     </tr>
+                    }
                 </tbody>
             </table>
         </section>
@@ -151,22 +148,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for (item of listDuenio; track item.cedula) {
                     <tr>
-                        <td>Manolo</td>
-                        <td>12</td>
-                        <td>Pájaro</td>
-                        <td>aaaaaa</td>
-                        <td>azul</td>
-                        <td>123</td>
+                        <td>{{item.cedula}}</td>
+                        <td>{{item.Primer_nombre}}</td>
+                        <td>{{item.Segundo_nombre}}</td>
+                        <td>{{item.Primer_Apellido}}</td>
+                        <td>{{item.Segundo_Apellido}}</td>
+                        <td>{{item.edad}}</td>
                         <td class="btns">
                             <button class="Edit">
                                 <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
                             </button>
-                            <button class="Delete">
+                            <button (click)="eliminarPersona(item.cedula)" class="Delete">
                                 <fa-icon [icon]="faTrash"></fa-icon> Eliminar
                             </button>
                         </td>
                     </tr>
+                    }
                 </tbody>
             </table>
         </section>

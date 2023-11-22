@@ -20,14 +20,14 @@ export class FormularioMascotaComponent {
   cancelar = faArrowLeft
   //formulario
   form =  new FormGroup({
-    nombre: new FormControl('', Validators.required),
-    edad: new FormControl('', Validators.required),
-    especie: new FormControl('', Validators.required),
-    raza: new FormControl('', Validators.required),
-    color: new FormControl('', Validators.required),
-    tamaño: new FormControl('', Validators.required),
-    peso: new FormControl('', Validators.required),
-    cedulaDueño: new FormControl('', Validators.required)
+    nombre: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/)]),
+    edad: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
+    especie: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/)]),
+    raza: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/)]),
+    color: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/)]),
+    tamaño: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
+    peso: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
+    cedulaDueño: new FormControl('', [Validators.required, Validators.pattern(/^[1-9]\d{7,9}$/)])
   })
   
   id: string

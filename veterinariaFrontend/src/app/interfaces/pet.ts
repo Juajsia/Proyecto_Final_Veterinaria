@@ -9,3 +9,7 @@ export interface Pet {
     Peso: number,
     IdDuenio: number
 }
+
+export interface msg {
+    mgs:string
+}
