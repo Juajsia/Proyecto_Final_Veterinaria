@@ -2,17 +2,18 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass, faL} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router } from '@angular/router';
 import { Persona } from '../../interfaces/persona';
 import { PersonaService } from '../../services/persona.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-persona',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent, FontAwesomeModule],
+  imports: [CommonModule, NavbarComponent, FooterComponent, FontAwesomeModule, FormsModule],
   templateUrl: './persona.component.html',
   styleUrl: './persona.component.css'
 })
@@ -84,5 +85,22 @@ export class PersonaComponent {
 
   mostrarForm(id: number){
     this.router.navigate([`persona/formulario/${id}`])
+  }
+
+  filtrarCed: string = ''
+  filtrado = false
+  filtrarPersona() :void {
+    if(this.filtrarCed === '') {
+      this.getPersonas()
+      this.filtrado = false
+    } else {
+      const Personafiltrada = this.listPerson.find(d => d.cedula === Number(this.filtrarCed))
+      this.listPerson = []
+      if(Personafiltrada !== undefined){
+        this.listPerson.push(Personafiltrada)
+        this.filtrado = true
+      }
+    }
+    this.filtrarCed = ''
   }
 }

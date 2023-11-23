@@ -2,15 +2,17 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFloppyDisk, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
-import { FormControl, FormGroup,ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup,FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { PersonaService } from '../../services/persona.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Persona } from '../../interfaces/persona';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-formulario-persona',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule,ReactiveFormsModule],
+  imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule, FormsModule],
   templateUrl: './formulario-persona.component.html',
   styleUrl: './formulario-persona.component.css'
 })
@@ -37,7 +39,7 @@ export class FormularioPersonaComponent {
   isEditable = true
   private router: Router = inject(Router)
 
-  constructor(private _personaService: PersonaService, private aRouter: ActivatedRoute){
+  constructor(private _personaService: PersonaService, private aRouter: ActivatedRoute, private toastr: ToastrService){
     this.id = Number(aRouter.snapshot.paramMap.get('id'))!
     // console.log(this.id)
   }
@@ -54,7 +56,7 @@ export class FormularioPersonaComponent {
 
   CUPersona(){
     // console.log(this.form)
-    console.log(this.rolSeleccionado)
+    // console.log(this.rolSeleccionado)
     const persona: Persona = {
     cedula: Number(this.form.value.cedula!),
     Primer_nombre: this.form.value.Primer_nombre!,
@@ -65,26 +67,36 @@ export class FormularioPersonaComponent {
     IdRol: Number(this.rolSeleccionado),
     }
 
-    console.log("per.rol: " + persona.IdRol)
+    // console.log("per.rol: " + persona.IdRol)
 
     if(this.id != 0){ //editar
       persona.cedula = this.id
-      this._personaService.updatePersona(this.id, persona).subscribe(() => {
+      this._personaService.updatePersona(this.id, persona).subscribe({
+        next: () => {
         console.log('Persona agregada')
         this.volver()
-      })
+        this.toastr.info(`Persona ${persona.Primer_Apellido} Actualizada Con Exito!`, 'Persona Actualizada')
+      }, error: (e: HttpErrorResponse) => {
+        this.toastr.error(`No se pudo Actualizar la Persona: Asegurese de ingresar los datos Adecuadamente`, 'Error Actualizando Persona')
+      }
+    })
     } else {  //crear
-      this._personaService.agregar(persona).subscribe( () => {
-        console.log('Persona agregada')
+      this._personaService.agregar(persona).subscribe( {
+        next:() => {
+        // console.log('Persona agregada')
         this.volver()
-      })
+        this.toastr.success(`Persona ${persona.Primer_Apellido} Creada Con Exito!`, 'Persona Creada')
+      }, error: (e: HttpErrorResponse) => {
+        this.toastr.error(`No se pudo Crear la Persona: Asegurese de ingresar los datos Adecuadamente`, 'Error Cerando Persona')
+      }
+    })
     }
   }
 
   getPersona(id: number){
     this._personaService.getById(id).subscribe((res: Persona[]) => {
       const data = res[0]
-      console.log(data)
+      // console.log(data)
       this.form.setValue({
         cedula: String(data.cedula),
         Primer_nombre: data.Primer_nombre,
