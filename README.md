@@ -25,3 +25,5 @@ Indicaciones:
       - Para los llamados a la base de datos, se está utiliando por defecto el usuario: "root" con una password: "1234".
    
 Para la Ejeucion del Proyecto, es necesario tener los 3 servicios mencionados anteriormente activos simultáneamente .
+
+<span>![</span><span>Captura de pantalla About us</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/Juajsia/Proyecto_Final_Veterinaria/blob/main/veterinariaFrontend/src/assets/Captura de pantalla veterinaria.png</span><span>)</span>
