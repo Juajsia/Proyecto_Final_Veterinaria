@@ -1,26 +1,48 @@
 <app-navbar></app-navbar>
 <main>
-    <div class="separador">
-        <section class="acciones">
-            <h2 id="titulo">Administradores</h2>
-            <div>
-                @if (!buscar) {
-                <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
-                }
-                <button class="btn" (click)="mostrarForm(0)" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
-                    Persona</button>
-            </div>
-        </section>
+
+    <div class="menu">
+        @if (!buscar) {
+        <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
+        }
+        <button class="btn" (click)="mostrarForm(0)" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
+            Persona</button>
+
+    </div>
+    <div>
         @if (buscar) {
         <section class="busqueda">
             <form action="" id="form-buscar">
-                <input type="text" class="params" placeholder="Ingrese la cedula del dueño">
-                <button class="btn" type="button"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
+                <input [(ngModel)]="filtrarCed" name="ced" type="number" class="params"
+                    placeholder="Ingrese la cedula del dueño">
+                <button (click)="filtrarPersona()" class="btn" type="button"><fa-icon [icon]="lupa"></fa-icon>
+                    Buscar</button>
             </form>
         </section>
         }
+    </div>
 
-        @if (listAdmin.length !== 0) {
+    @if (filtrado) {
+    <div class="separador">
+        <section class="acciones">
+            @switch (listPerson[0].IdRol) {
+            @case (1) {
+            <h2 id="titulo">Administrador</h2>
+            }
+            @case (2) {
+            <h2 id="titulo">Veterinario</h2>
+            }
+            @case (3) {
+            <h2 id="titulo">Vendedor</h2>
+            }
+            @case (4) {
+            <h2 id="titulo">Dueño</h2>
+            }
+            @default {
+
+            }
+            }
+        </section>
         <section class="contenido">
             <table>
                 <thead>
@@ -31,6 +53,7 @@
                         <th>Primer Apellido</th>
                         <th>Segundo Apellido</th>
                         <th>Edad</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +65,50 @@
                         <td>{{item.Primer_Apellido}}</td>
                         <td>{{item.Segundo_Apellido}}</td>
                         <td>{{item.edad}}</td>
+                        <td class="btns">
+                            <button class="Edit" (click)="mostrarForm(item.cedula!)">
+                                <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+    </div>
+    } @else {
+    <div class="separador">
+        <section class="acciones">
+            <h2 id="titulo">Administradores</h2>
+        </section>
+        @if (listAdmin.length !== 0) {
+        <section class="contenido">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Edad</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of listAdmin; track item.cedula) {
+                    <tr>
+                        <td>{{item.cedula}}</td>
+                        <td>{{item.Primer_nombre}}</td>
+                        <td>{{item.Segundo_nombre}}</td>
+                        <td>{{item.Primer_Apellido}}</td>
+                        <td>{{item.Segundo_Apellido}}</td>
+                        <td>{{item.edad}}</td>
+                        <td class="btns">
+                            <button class="Edit" (click)="mostrarForm(item.cedula!)">
+                                <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                            </button>
+                        </td>
                     </tr>
                     }
                 </tbody>
@@ -186,6 +253,7 @@
         <h3>No hay Dueños Registrados</h3>
         }
     </div>
+    }
 
 </main>
 

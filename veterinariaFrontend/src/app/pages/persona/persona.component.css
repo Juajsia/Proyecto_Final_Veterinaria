@@ -2,10 +2,15 @@
     font-family: "Open sans", sans-serif;
 }
 
-
 main {
     position: relative;
     top: 85px;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 .separador{

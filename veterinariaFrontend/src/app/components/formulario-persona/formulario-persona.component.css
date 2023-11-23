@@ -36,6 +36,11 @@ label {
 }
 
 form {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.inputs {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -100,4 +105,8 @@ input,select {
     color: #ffff;
     border-color: #ffff;
     transform: scale(1.05);
+}
+
+span {
+    color: #b14242
 }

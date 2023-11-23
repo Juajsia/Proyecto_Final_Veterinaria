@@ -20,17 +20,16 @@
         <ul class="nav-links">
 
             <li><a routerLink="/">Inicio</a></li>
+            @if (rol == '1') {
+            <li><a routerLink="/persona">Administrar Personas</a></li>
+            }
             @if (rol == '1' || rol == '2') {
             <li><a routerLink="/mascota">Administrar Mascotas</a></li>
             <li><a href="#">Consultar historia clínica</a></li>
             }
-            @if (rol == '1') {
-            <li><a routerLink="/persona">Administrar Personas</a></li>
-            }
 
             <li><a routerLink="/about">Sobre nosotros</a></li>
         </ul>
-        <!-- <img [src]="logo" alt="perfil" id="imgPerfil"> -->
 
         @if (!loginStatus) {
         <a class="btn-login" routerLink="/login">Iniciar Sesión</a>
