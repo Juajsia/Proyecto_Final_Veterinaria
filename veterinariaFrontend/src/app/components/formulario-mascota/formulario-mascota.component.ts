@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pet } from '../../interfaces/pet';
 import { MascotaService } from '../../services/mascota.service';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-formulario-mascota',
@@ -30,14 +32,14 @@ export class FormularioMascotaComponent {
     color: new FormControl('', [Validators.required, Validators.pattern(this.textRegex)]),
     tamaño: new FormControl('', [Validators.required, Validators.pattern(this.numberRegex)]),
     peso: new FormControl('', [Validators.required, Validators.pattern(this.numberRegex)]),
-    cedulaDueño: new FormControl('', [Validators.required, Validators.pattern(this.cedRegex)])
+    cedulaDueño: new FormControl('', [Validators.required, Validators.pattern(this.numberRegex)])
   })
   
   id: string
   operacion: string = 'Agregar '
   private router: Router = inject(Router)
 
-  constructor(private _mascotaService: MascotaService, private aRouter: ActivatedRoute){
+  constructor(private _mascotaService: MascotaService, private aRouter: ActivatedRoute, private toastr : ToastrService){
     this.id = aRouter.snapshot.paramMap.get('id')!
     // console.log(this.id)
   }
@@ -65,15 +67,25 @@ export class FormularioMascotaComponent {
 
     if(this.id != '0'){ //editar
       mascota.IDMascota = this.id
-      this._mascotaService.updateMascota(this.id, mascota).subscribe(() => {
+      this._mascotaService.updateMascota(this.id, mascota).subscribe({
+        next: () => {
         console.log('Mascota agregada')
         this.volver()
-      })
+        this.toastr.info(`Mascota ${mascota.Nombre} Actualizada Con Exito!`, 'Mascota Actualizada')
+      }, error: (e: HttpErrorResponse) => {
+        this.toastr.error(`No se pudo Actualizar la mascota: Asegurese de ingresar los datos Adecuadamente`, 'Error Actualizando Mascota')
+      }
+    })
     } else {  //crear
-      this._mascotaService.agregar(mascota).subscribe( () => {
+      this._mascotaService.agregar(mascota).subscribe( {
+        next: () => {
         console.log('Mascota agregada')
         this.volver()
-      })
+        this.toastr.success(`Mascota ${mascota.Nombre} Creada Con Exito!`, 'Mascota Creada')
+      }, error: (e: HttpErrorResponse) => {
+        this.toastr.error(`No se pudo Crear la mascota: Asegurese de ingresar los datos Adecuadamente`, 'Error Cerando Mascota')
+      }
+    })
     }
   }
 
