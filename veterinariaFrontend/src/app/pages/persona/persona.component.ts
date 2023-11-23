@@ -68,7 +68,7 @@ export class PersonaComponent {
         this.filtrarRol()
     })
   }
-
+  
   eliminarPersona(id:number){
     console.log(id)
     this._personService.deletePerson(id).subscribe(()=>{
@@ -80,7 +80,7 @@ export class PersonaComponent {
     this.buscar = true
   }
 
-   mostrarForm(){
-    this.router.navigate(['persona/formulario'])
+  mostrarForm(id: number){
+    this.router.navigate([`persona/formulario/${id}`])
   }
 }

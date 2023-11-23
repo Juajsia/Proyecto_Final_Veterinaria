@@ -2,19 +2,19 @@
     <article>
         <div class="from-container">
             <h1>{{operacion}} Mascota</h1>
-            <form [formGroup]="form" (ngSubmit)="agregarMascota()" id="form" action="/login" method="post">
+            <form [formGroup]="form" (ngSubmit)="CUMascota()" id="form" action="/login" method="post">
                 <div class="inputs">
                     <div class="group">
                         <label for="nombre" class="form-input">Nombre:</label>
                         <input formControlName="nombre" type="text" id="nombre" class="form-input"
                             placeholder="Ingrese el nombre" required>
-                        @if (form.get('nombre')?.hasError('required') && form.get('edad')?.touched) {
+                        @if (form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
                         <span>*Campo requerido*</span>
                         }
                         <label for="edad" class="form-input">Edad:</label>
                         <input formControlName="edad" type="number" id="edad" class="form-input"
                             placeholder="Ingrese la edad" required>
-                        @if (form.get('edad')?.hasError('required') && form.get('nombre')?.touched) {
+                        @if (form.get('edad')?.hasError('required') && form.get('edad')?.touched) {
                         <span>*Campo requerido*</span>
                         }
                         <label for="especie" class="form-input">Especie:</label>
@@ -26,7 +26,7 @@
                         <label for="raza" class="form-input">Raza:</label>
                         <input formControlName="raza" type="text" id="raza" class="form-input"
                             placeholder="Ingrese la raza" required>
-                        @if (form.get('raza')?.hasError('required') && form.get('edad')?.touched) {
+                        @if (form.get('raza')?.hasError('required') && form.get('raza')?.touched) {
                         <span>*Campo requerido*</span>
                         }
                     </div>

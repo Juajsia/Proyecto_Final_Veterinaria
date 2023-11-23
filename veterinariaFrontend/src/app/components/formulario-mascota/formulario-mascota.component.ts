@@ -35,7 +35,7 @@ export class FormularioMascotaComponent {
   
   id: string
   operacion: string = 'Agregar '
-
+  private router: Router = inject(Router)
 
   constructor(private _mascotaService: MascotaService, private aRouter: ActivatedRoute){
     this.id = aRouter.snapshot.paramMap.get('id')!
@@ -49,7 +49,7 @@ export class FormularioMascotaComponent {
     }
   }
 
-  agregarMascota(){
+  CUMascota(){
     // console.log(this.form)
 
     const mascota: Pet = {
@@ -94,11 +94,6 @@ export class FormularioMascotaComponent {
     })
   }
 
-  actualizarMascota(){
-    
-  }
-
-  private router: Router = inject(Router)
   volver(){
     this.router.navigate(['mascota'])
   }

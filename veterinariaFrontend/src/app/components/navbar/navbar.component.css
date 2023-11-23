@@ -3,7 +3,7 @@
     font-family: "Open sans", sans-serif;
 }
 
-.btn-login{
+.btn-login {
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -16,11 +16,13 @@
     letter-spacing: 0.05em;
     transition: all .5s ease;
 }
-#close:hover{
+
+#close:hover {
     color: #ffff;
     border-color: #ffff;
     background-color: #e02323;
 }
+
 .btn-login:hover {
     background-color: #ffbc03;
     color: #ffff;
@@ -41,8 +43,13 @@ nav {
     padding: 5px 10%;
 }
 
+#rol {
+    display: flex;
+    align-items: center;
+}
+
 #logo {
-    width: 150px;
+    width: 100px;
 }
 
 #imgPerfil {

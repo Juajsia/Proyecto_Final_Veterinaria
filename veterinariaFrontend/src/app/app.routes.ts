@@ -31,7 +31,7 @@ export const routes: Routes = [{
     component: FormularioMascotaComponent,
     canActivate: [loginGuard, rolVeterinario]
 },{
-    title: 'FormularioEditar',
+    title: 'FormularioEditarMascota',
     path: 'mascota/formulario/:id',
     component: FormularioMascotaComponent,
     canActivate: [loginGuard, rolVeterinario]
@@ -45,4 +45,9 @@ export const routes: Routes = [{
     path: 'persona/formulario',
     component: FormularioPersonaComponent,
     canActivate: [loginGuard, rolAdmin]
+},{
+    title: 'FormularioEditarPersona',
+    path: 'persona/formulario/:id',
+    component: FormularioPersonaComponent,
+    canActivate: [loginGuard, rolVeterinario]
 }];

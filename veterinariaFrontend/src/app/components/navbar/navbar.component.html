@@ -1,6 +1,22 @@
 <div class="header">
     <nav>
-        <img src="../../../assets/LogoVeterinaria.png" alt="logo" id="logo">
+        <div id="rol">
+            <img src="../../../assets/LogoVeterinariaRecortado.png" alt="logo" id="logo">
+            @switch (rol) {
+            @case ('1') {
+            <h2>Administrador</h2>
+            }
+            @case ('2') {
+            <h2>Veterinario</h2>
+            }
+            @case ('3') {
+            <h2>Vendedor</h2>
+            }
+            @default {
+
+            }
+            }
+        </div>
         <ul class="nav-links">
 
             <li><a routerLink="/">Inicio</a></li>

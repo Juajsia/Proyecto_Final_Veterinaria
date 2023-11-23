@@ -7,7 +7,7 @@
                 @if (!buscar) {
                 <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
                 }
-                <button class="btn" (click)="mostrarForm()" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
+                <button class="btn" (click)="mostrarForm(0)" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
                     Persona</button>
             </div>
         </section>
@@ -31,7 +31,6 @@
                         <th>Primer Apellido</th>
                         <th>Segundo Apellido</th>
                         <th>Edad</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,7 +80,7 @@
                         <td>{{item.Segundo_Apellido}}</td>
                         <td>{{item.edad}}</td>
                         <td class="btns">
-                            <button class="Edit">
+                            <button class="Edit" (click)="mostrarForm(item.cedula!)">
                                 <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
                             </button>
                             <button (click)="eliminarPersona(item.cedula)" class="Delete">
@@ -126,7 +125,7 @@
                         <td>{{item.Segundo_Apellido}}</td>
                         <td>{{item.edad}}</td>
                         <td class="btns">
-                            <button class="Edit">
+                            <button class="Edit" (click)="mostrarForm(item.cedula!)">
                                 <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
                             </button>
                             <button (click)="eliminarPersona(item.cedula)" class="Delete">
@@ -171,7 +170,7 @@
                         <td>{{item.Segundo_Apellido}}</td>
                         <td>{{item.edad}}</td>
                         <td class="btns">
-                            <button class="Edit">
+                            <button class="Edit" (click)="mostrarForm(item.cedula!)">
                                 <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
                             </button>
                             <button (click)="eliminarPersona(item.cedula)" class="Delete">
