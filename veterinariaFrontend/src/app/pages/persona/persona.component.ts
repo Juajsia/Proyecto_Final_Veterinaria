@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router } from '@angular/router';
 import { Persona } from '../../interfaces/persona';
 import { PersonaService } from '../../services/persona.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-persona',
@@ -28,7 +29,7 @@ export class PersonaComponent {
   listVendedor: Persona[] = []
   listDuenio: Persona[] = []
 
-  constructor(private _personService: PersonaService) {
+  constructor(private _personService: PersonaService, private toastr: ToastrService) {
     this.getPersonas()
   }
 
@@ -69,10 +70,11 @@ export class PersonaComponent {
     })
   }
 
-  eliminarPersona(id:number){
+  eliminarPersona(id:number, Nombre: string){
     console.log(id)
     this._personService.deletePerson(id).subscribe(()=>{
       this.getPersonas()
+      this.toastr.warning(`Persona ${Nombre} Eliminada con Exito!`, 'Persona Eliminada')
     })
   }
 
