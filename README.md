@@ -24,6 +24,6 @@ Indicaciones:
       - Por defecto, El proyecto está utilizando el puerto localhoost:3306 para la ejecución de la base de datos, puerto iniciado por defecto al instalar MySql con la configuración base.
       - Para los llamados a la base de datos, se está utiliando por defecto el usuario: "root" con una password: "1234".
    
-Para la Ejeucion del Proyecto, es necesario tener los 3 servicios mencionados anteriormente activos simultáneamente .
+Para la Ejeucion del Proyecto, es necesario tener los 3 servicios mencionados anteriormente activos simultáneamente.
 
-<span>![</span><span>Captura de pantalla About us</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/Juajsia/Proyecto_Final_Veterinaria/blob/main/veterinariaFrontend/src/assets/Captura-de-pantalla-veterinaria.png</span><span>)</span>
+![Imagen Ejemplo](https://github.com/Juajsia/Proyecto_Final_Veterinaria/blob/main/veterinariaFrontend/src/assets/Captura-de-pantalla-veterinaria.png)
