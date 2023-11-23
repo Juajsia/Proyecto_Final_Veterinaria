@@ -19,6 +19,8 @@
             </form>
         </section>
         }
+
+        @if (listAdmin.length !== 0) {
         <section class="contenido">
             <table>
                 <thead>
@@ -46,12 +48,16 @@
                 </tbody>
             </table>
         </section>
+        }@else {
+        <h3>No hay Administradores registrados</h3>
+        }
     </div>
 
     <div class="separador">
         <section class="acciones">
             <h2 id="titulo">Veterinarios</h2>
         </section>
+        @if (listVeterinario.length !== 0) {
         <section class="contenido">
             <table>
                 <thead>
@@ -87,12 +93,16 @@
                 </tbody>
             </table>
         </section>
+        }@else {
+        <h3>No hay Veterinarios Registrados</h3>
+        }
     </div>
 
     <div class="separador">
         <section class="acciones">
             <h2 id="titulo">Vendedores</h2>
         </section>
+        @if (listVendedor.length !== 0) {
         <section class="contenido">
             <table>
                 <thead>
@@ -128,12 +138,16 @@
                 </tbody>
             </table>
         </section>
+        }@else {
+        <h3>No hay Vendedores Registrados</h3>
+        }
     </div>
 
     <div class="separador">
         <section class="acciones">
-            <h2 id="titulo">Personas</h2>
+            <h2 id="titulo">Dueños</h2>
         </section>
+        @if (listDuenio.length !== 0) {
         <section class="contenido">
             <table>
                 <thead>
@@ -169,6 +183,9 @@
                 </tbody>
             </table>
         </section>
+        }@else {
+        <h3>No hay Dueños Registrados</h3>
+        }
     </div>
 
 </main>

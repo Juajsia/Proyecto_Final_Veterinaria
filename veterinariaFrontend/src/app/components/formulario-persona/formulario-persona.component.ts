@@ -15,13 +15,17 @@ export class FormularioPersonaComponent {
   guardar = faFloppyDisk
   cancelar = faArrowLeft
 
+  textRegex = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/
+  numberRegex = /^\d+(\.\d{1,2})?$/
+  cedRegex = /^[0-9]\d{7,9}$/
+
   form =  new FormGroup({
-    cedula: new FormControl(['', [Validators.required, Validators.pattern(/^[1-9]\d{7,9}$/)]]),
-    Primer_nombre: new FormControl(['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/)]]),
-    Segundo_nombre: new FormControl(['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/)]]),
-    Primer_Apellido: new FormControl(['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/)]]),
-    Segundo_Apellido: new FormControl(['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/)]]),
-    edad: new FormControl(['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]]),
+    cedula: new FormControl('', [Validators.required, Validators.pattern(this.cedRegex)]),
+    Primer_nombre: new FormControl('', [Validators.required, Validators.pattern(this.textRegex)]),
+    Segundo_nombre: new FormControl('', [Validators.required, Validators.pattern(this.textRegex)]),
+    Primer_Apellido: new FormControl('', [Validators.required, Validators.pattern(this.textRegex)]),
+    Segundo_Apellido: new FormControl('', [Validators.required, Validators.pattern(this.textRegex)]),
+    edad: new FormControl('', [Validators.required, Validators.pattern(this.numberRegex)]),
     IdRol: new FormControl('', [Validators.required])
   })
 }

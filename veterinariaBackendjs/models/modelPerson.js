@@ -73,6 +73,7 @@ export class PersonModel {
       if (person.err) {
         return { err: 'usuario no está registrado' }
       } else {
+        await connection.query('delete from mascota where IdDuenio = ?;', [id])
         await connection.query('call Eliminar_Persona(?);', [id])
         return { msg: 'usuario eliminado con exito' }
       }
@@ -83,6 +84,23 @@ export class PersonModel {
       }
     }
   }
+
+  // static async delete ({ id }) {
+  //   try {
+  //     const person = await this.getById({ id })
+  //     if (person.err) {
+  //       return { err: 'usuario no está registrado' }
+  //     } else {
+  //       await connection.query('call Eliminar_Persona(?);', [id])
+  //       return { msg: 'usuario eliminado con exito' }
+  //     }
+  //   } catch (error) {
+  //     return {
+  //       err: 'Error eliminado Persona',
+  //       mgs: error.message
+  //     }
+  //   }
+  // }
 
   static async update ({ id, data }) {
     try {
