@@ -1,5 +1,7 @@
 <div class="header">
     <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn"> <fa-icon [icon]="barra"></fa-icon> </label>
         <div id="rol">
             <img src="../../../assets/LogoVeterinariaRecortado.png" alt="logo" id="logo">
             @switch (rol) {
@@ -13,7 +15,7 @@
             <h2>Vendedor</h2>
             }
             @default {
-
+            <h2>Veterinaria</h2>
             }
             }
         </div>
@@ -29,13 +31,14 @@
             }
 
             <li><a routerLink="/about">Sobre nosotros</a></li>
-        </ul>
 
-        @if (!loginStatus) {
-        <a class="btn-login" routerLink="/login">Iniciar Sesión</a>
-        }
-        @else {
-        <button class="btn-login" id="close" (click)="logOut()">Cerrar Sesión</button>
-        }
+            @if (!loginStatus) {
+            <a id="log" class="btn-login" routerLink="/login">Iniciar Sesión</a>
+            }
+            @else {
+            <button class="btn-login" id="close" (click)="logOut()">Cerrar Sesión</button>
+            }
+        </ul>
+        <div></div>
     </nav>
 </div>
