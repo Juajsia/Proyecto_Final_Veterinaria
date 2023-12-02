@@ -15,7 +15,7 @@
             <h2>Vendedor</h2>
             }
             @default {
-
+            <h2>Veterinaria</h2>
             }
             }
         </div>
@@ -33,12 +33,12 @@
             <li><a routerLink="/about">Sobre nosotros</a></li>
 
             @if (!loginStatus) {
-            <a class="btn-login" routerLink="/login">Iniciar Sesión</a>
+            <a id="log" class="btn-login" routerLink="/login">Iniciar Sesión</a>
             }
             @else {
             <button class="btn-login" id="close" (click)="logOut()">Cerrar Sesión</button>
             }
         </ul>
-
+        <div></div>
     </nav>
 </div>

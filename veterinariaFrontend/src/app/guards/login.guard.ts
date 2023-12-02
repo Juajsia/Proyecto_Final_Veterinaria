@@ -11,6 +11,14 @@ export const loginGuard = ():boolean => {
     }
 }
 
+export const Guard = ():boolean => {
+    if (localStorage.getItem('token')) {
+        return true
+    } else {
+        return false
+    }
+}
+
 export const rolVeterinario = () => {
     const rol = localStorage.getItem('rol')
     const router = inject(Router)
