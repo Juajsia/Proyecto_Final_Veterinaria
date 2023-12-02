@@ -33,9 +33,3 @@
 #avanzar {
     right: 2px;
 }
-
-@media (width <= 1000px) {
-    .carousel {
-        height: 200px;
-    }
-}
