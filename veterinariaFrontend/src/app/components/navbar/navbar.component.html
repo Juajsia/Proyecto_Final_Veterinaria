@@ -32,7 +32,7 @@
 
             <li><a routerLink="/about">Sobre nosotros</a></li>
             @if (!loginStatus) {
-            <a class="btn-login" routerLink="/login">Iniciar Sesión</a>
+            <a id="log" class="btn-login" routerLink="/login">Iniciar Sesión</a>
             }
             @else {
             <button type="button" class="btn-login" id="close" (click)="logOut()">Cerrar Sesión</button>
