@@ -1,6 +1,8 @@
 <div class="header">
     <nav>
         <div id="rol">
+            <input type="checkbox" id="check" name="check">
+            <label for="check" class="checkbtn"> <fa-icon [icon]="barra"></fa-icon> </label>
             <img src="../../../assets/LogoVeterinariaRecortado.png" alt="logo" id="logo">
             @switch (rol) {
             @case ('1') {
@@ -29,13 +31,13 @@
             }
 
             <li><a routerLink="/about">Sobre nosotros</a></li>
+            @if (!loginStatus) {
+            <a class="btn-login" routerLink="/login">Iniciar Sesión</a>
+            }
+            @else {
+            <button type="button" class="btn-login" id="close" (click)="logOut()">Cerrar Sesión</button>
+            }
         </ul>
-
-        @if (!loginStatus) {
-        <a class="btn-login" routerLink="/login">Iniciar Sesión</a>
-        }
-        @else {
-        <button type="button" class="btn-login" id="close" (click)="logOut()">Cerrar Sesión</button>
-        }
+        <div></div>
     </nav>
 </div>
