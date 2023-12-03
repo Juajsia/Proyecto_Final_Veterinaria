@@ -7,6 +7,7 @@ import { loginGuard, rolAdmin, rolVeterinario } from './guards/login.guard';
 import { FormularioMascotaComponent } from './components/formulario-mascota/formulario-mascota.component';
 import { PersonaComponent } from './pages/persona/persona.component';
 import { FormularioPersonaComponent } from './components/formulario-persona/formulario-persona.component';
+import { HistorialVacunaComponent } from './pages/historial-vacuna/historial-vacuna.component';
 
 export const routes: Routes = [{
     title: 'Home',
@@ -49,5 +50,10 @@ export const routes: Routes = [{
     title: 'FormularioEditarPersona',
     path: 'persona/formulario/:id',
     component: FormularioPersonaComponent,
+    canActivate: [loginGuard, rolVeterinario]
+},{
+    title: 'Historial De Vacuna',
+    path: 'mascota/historialVacuna/:id',
+    component: HistorialVacunaComponent,
     canActivate: [loginGuard, rolVeterinario]
 }];

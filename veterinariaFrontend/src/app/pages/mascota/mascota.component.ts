@@ -34,7 +34,7 @@ export class MascotaComponent{
   getMascotas(){
     this._petService.getAllPets().subscribe((data) => {
       if (Array.isArray(data)) {
-        this.listPets = data
+        this.listPets = data.reverse()
       } else {
           this.listPets = []
         }
@@ -48,12 +48,14 @@ export class MascotaComponent{
   mostrarForm(id: string){
     this.router.navigate([`mascota/formulario/${id}`])
   }
+
   eliminarMascota(id:string, Nombre: string) {
     this._petService.deletePet(id).subscribe(() => {
       this.getMascotas()
       this.toastr.warning(`Mascota ${Nombre} Eliminada con Exito!`, 'Mascota Eliminada')
     })
   }
+
   filtarNombre: string = ''
   filtarCed: string = ''
   filtrarMascota(): void{
@@ -88,5 +90,9 @@ export class MascotaComponent{
     this.filtarNombre = ''
     this.filtarCed = ''
     return
+  }
+
+  historialVacunas(id: string) {
+    this.router.navigate([`mascota/historialVacuna/${id}`])
   }
 }

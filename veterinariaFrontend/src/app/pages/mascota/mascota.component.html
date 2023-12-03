@@ -56,6 +56,9 @@
                         <button (click)="eliminarMascota(item.IDMascota!, item.Nombre)" class="Delete">
                             <fa-icon [icon]="faTrash"></fa-icon> Eliminar
                         </button>
+                        <button (click)="historialVacunas(item.IDMascota!)" class="Delete">
+                            <fa-icon [icon]="faTrash"></fa-icon> Historial Vacunas
+                        </button>
                     </td>
                 </tr>
                 }
