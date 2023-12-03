@@ -6,7 +6,7 @@
 main {
     position: relative;
     top: 85px;
-    height: 100vh;
+    height: 100%;
 }
 
 table {
