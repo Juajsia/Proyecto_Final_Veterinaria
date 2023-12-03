@@ -8,6 +8,7 @@ export const createMedicalHistoryRouter = ({ MedicalHistoryModel }) => {
 
   medicalHistoryRouter.get('/', medicalHistoryController.getAll)
   medicalHistoryRouter.get('/:id', medicalHistoryController.getById)
+  medicalHistoryRouter.get('/pet/:id', medicalHistoryController.getByPetId)
   medicalHistoryRouter.post('/', medicalHistoryController.create)
   medicalHistoryRouter.delete('/:id', medicalHistoryController.delete)
   medicalHistoryRouter.patch('/:id', medicalHistoryController.update)

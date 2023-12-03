@@ -20,6 +20,16 @@ export class MedicalHistoryController {
     }
   }
 
+  getByPetId = async (req, res) => {
+    const { id } = req.params
+    const medicalHistory = await this.MedicalHistoryModel.getByPetId({ id })
+    if (medicalHistory.err) {
+      res.status(404).json(medicalHistory)
+    } else {
+      res.json(medicalHistory)
+    }
+  }
+
   create = async (req, res) => {
     // validar data
     const result = validateMedicalHistory(req.body)

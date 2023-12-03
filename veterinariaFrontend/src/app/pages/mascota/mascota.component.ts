@@ -95,4 +95,8 @@ export class MascotaComponent{
   historialVacunas(id: string) {
     this.router.navigate([`mascota/historialVacuna/${id}`])
   }
+
+  historialClinico(id: string) {
+    this.router.navigate([`mascota/historialClinico/${id}`])
+  }
 }

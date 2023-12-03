@@ -115,6 +115,6 @@ export class FormularioPersonaComponent {
   capturarRol(event: Event): void {
     const valorSeleccionado = (event.target as HTMLSelectElement).value;
     this.rolSeleccionado = valorSeleccionado
-    // console.log(valorSeleccionado);
+    //console.log(valorSeleccionado);
   }
 }

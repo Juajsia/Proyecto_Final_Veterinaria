@@ -6,8 +6,9 @@ export interface HistoriaClinica{
     Diagnostico: number,
     Procedimiento: string,
     MedicamentosAlergia: string,
-    IdMascota?: number,
+    IdMascota?: string,
     NombreMascota: string,
+    CedulaDueño: number,
     IdOrden?: string,
     CedulaVeterinario: string
 }

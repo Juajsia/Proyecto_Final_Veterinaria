@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+
+<main>
+    <section class="acciones">
+        <h2 id="titulo">Historial Clínico {{nombre}}</h2>
+        <div>
+            @if (listHistCli.length !== 0 && !buscar) {
+            <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
+            }
+            <button class="btn" id="cancel" (click)="volver()"><fa-icon [icon]="cancelar"></fa-icon> Regresar
+            </button>
+            <button class="btn" (click)="mostrarForm(0, idMascota)" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
+                Registro</button>
+        </div>
+    </section>
+    @if (buscar) {
+    <section class="busqueda">
+        <form action="" id="form-buscar">
+            <input type="text" [(ngModel)]="filtrarFecha" name="nombre" class="params" placeholder="Ingrese la fecha">
+            <input type="number" [(ngModel)]="filtarIdVet" name="cedula" class="params"
+                placeholder="Ingrese la cedula del veterinario">
+            <button (click)="filtrarHisCli()" class="btn" type="button"><fa-icon [icon]="lupa"></fa-icon>
+                Buscar</button>
+            <button (click)="getHistoriaClinica(idMascota)" (click)="buscar=false" class="btn" id="cerrarBuscar"
+                type="button">
+                <fa-icon [icon]="cerrar"></fa-icon> Cerrar búsqueda</button>
+        </form>
+    </section>
+    }
+    @if (listHistCli.length !== 0) {
+    <section class="contenido">
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Motivo</th>
+                    <th>Sintomatología</th>
+                    <th>Diagnóstico</th>
+                    <th>Procedimiento</th>
+                    <th>Medicamientos Alergia</th>
+                    <th>Orden</th>
+                    <th>Cedula Veterinario</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of listHistCli; track item.IdHistoria_Clinica) {
+                <tr>
+                    <td>{{FormatoFecha(item.Fecha!)}}</td>
+                    <td>{{item.Motivo}}</td>
+                    <td>{{item.Sintomatologia}}</td>
+                    <td>{{item.Diagnostico}}</td>
+                    <td>{{item.Procedimiento}}</td>
+                    <td>{{item.MedicamentosAlergia}}</td>
+                    @if (item.IdOrden === null) {
+                    <td>No hay orden asociada</td>
+                    } @else {
+                    <td>{{item.IdOrden}}</td>
+                    }
+                    <td>{{item.CedulaVeterinario}}</td>
+                    <td class="btns">
+                        <button class="Edit" (click)="mostrarForm(item.IdHistoria_Clinica!, item.IdMascota!)">
+                            <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
+                        </button>
+                        <button
+                            (click)="eliminarRegistro(item.IdHistoria_Clinica!, item.NombreMascota, item.Procedimiento)"
+                            class="Delete">
+                            <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+    }@else {
+    <h3>No hay Registros en el historial clinico de esta mascota </h3>
+    }
+</main>
+
+<app-footer></app-footer>

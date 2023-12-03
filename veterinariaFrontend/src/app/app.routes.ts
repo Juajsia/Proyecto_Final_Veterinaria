@@ -8,6 +8,9 @@ import { FormularioMascotaComponent } from './components/formulario-mascota/form
 import { PersonaComponent } from './pages/persona/persona.component';
 import { FormularioPersonaComponent } from './components/formulario-persona/formulario-persona.component';
 import { HistorialVacunaComponent } from './pages/historial-vacuna/historial-vacuna.component';
+import { HistoriaClinicaService } from './services/historia-clinica.service';
+import { HistorialClinicoComponent } from './pages/historial-clinico/historial-clinico.component';
+import { FormularioHistorialClinicoComponent } from './components/formulario-historial-clinico/formulario-historial-clinico.component';
 
 export const routes: Routes = [{
     title: 'Home',
@@ -55,5 +58,15 @@ export const routes: Routes = [{
     title: 'Historial De Vacuna',
     path: 'mascota/historialVacuna/:id',
     component: HistorialVacunaComponent,
+    canActivate: [loginGuard, rolVeterinario]
+},{
+    title: 'Historial clinico',
+    path: 'mascota/historialClinico/:id',
+    component: HistorialClinicoComponent,
+    canActivate: [loginGuard, rolVeterinario]
+},{
+    title: 'Formulario Historial clinico',
+    path: 'mascota/historialClinico/formulario/:id',
+    component: FormularioHistorialClinicoComponent,
     canActivate: [loginGuard, rolVeterinario]
 }];

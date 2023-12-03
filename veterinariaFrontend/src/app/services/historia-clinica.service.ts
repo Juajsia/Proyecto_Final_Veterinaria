@@ -11,11 +11,16 @@ export class HistoriaClinicaService {
   private myApiUrl: string
   constructor(private http:HttpClient) {
     this.myAppUrl = 'http://localhost:3000/'
-    this.myApiUrl = 'api/HistoriaClinica'
+    this.myApiUrl = 'api/medicalHistory'
    }
 
    getAllHistVac(): Observable<HistoriaClinica[]>{
+    console.log("ffff")
     return this.http.get<HistoriaClinica[]>(`${this.myAppUrl}${this.myApiUrl}/`)
+   }
+
+   getByPetId(id: string): Observable<HistoriaClinica[]>{
+    return this.http.get<HistoriaClinica[]>(`${this.myAppUrl}${this.myApiUrl}/pet/${id}`)
    }
 
    getById(id: number): Observable<HistoriaClinica[]>{

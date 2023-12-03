@@ -1,0 +1,120 @@
+<section>
+    <article>
+        <div class="from-container">
+            <h1>{{operacion}} Registro En La Historia Clínica</h1>
+            <form [formGroup]="form" (ngSubmit)="CUHistoriaClinica()" id="form">
+                <div class="inputs">
+                    <div class="group">
+                        <label for="Motivo" class="form-input">Motivo:</label>
+                        <input formContProcedimientoName="Motivo" type="text" id="Motivo" class="form-input"
+                            placeholder="Ingrese el motivo" required>
+                        @if (form.get('Motivo')?.hasError('required') && form.get('Motivo')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="NombreMascota" class="form-input">Nombre de la Mascota:</label>
+                        <input formContProcedimientoName="NombreMascota" type="text" id="NombreMascota"
+                            class="form-input" placeholder="Ingrese el nombre de la Mascota" required>
+                        @if (form.get('NombreMascota')?.hasError('required') && form.get('NombreMascota')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="CedulaDueño" class="form-input">Cedula del Dueño:</label>
+                        <input formContProcedimientoName="CedulaDueño" type="number" id="CedulaDueño" class="form-input"
+                            placeholder="Ingrese la cedula del Dueño" required>
+                        @if (form.get('CedulaDueño')?.hasError('required') && form.get('CedulaDueño')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="IdVeterinario" class="form-input">Cedula del veterinario:</label>
+                        <input formContProcedimientoName="IdVeterinario" type="number" id="IdVeterinario"
+                            class="form-input" placeholder="Ingrese la cedula del veterinario" required>
+                        @if (form.get('IdVeterinario')?.hasError('required') && form.get('IdVeterinario')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+
+                        @if (form.get('Diagnostico')?.hasError('required') && form.get('Diagnostico')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <!-- <label for="Procedimiento" class="form-input">Procedimiento:</label>
+                        <input formContProcedimientoName="Procedimiento" type="text" id="Procedimiento" class="form-input"
+                            placeholder="Ingrese la Procedimiento" required>
+                        @if (form.get('Procedimiento')?.hasError('required') && form.get('Procedimiento')?.touched) {
+                        <span>*Campo requerido*</span>
+                        } -->
+                        <label for="Procedimiento" class="form-input">Procedimiento:</label>
+                        <select [(ngModel)]="ProcedimientoSeleccionado" [ngModelOptions]="{standalone: true}"
+                            (change)="capturarProcedimiento($event)" class="" name="select">
+                            <option value="1" selected>Desparasitación</option>
+                            <option value="2">Fisioterapia</option>
+                            <option value="3">Vacunación</option>
+                            <option value="4">Exámen</option>
+                            <option value="5">Cirugía</option>
+                            <option value="6">Otro</option>
+                        </select>
+                        @if (form.get('Procedimiento')?.hasError('required') && form.get('Procedimiento')?.touched)
+                        {
+                        <span>*Campo requerido*</span>
+                        }
+                        @if (ProcedimientoSeleccionado == '3') {
+                        <label for="NombreVacunas" class="form-input">Vacunas aplicadas:</label>
+                        <textarea formContProcedimientoName="NombreVacunas" id="NombreVacunas" name="NombreVacunas"
+                            rows="15" cols="50" required placeholder="Ingrese las vacunas (separadas por comas)"
+                            maxlength="1000"></textarea>
+                        <!-- <input formContProcedimientoName="NombreVacunas" type="text" id="NombreVacunas"
+                            class="form-input" placeholder="Ingrese las vacunas (separadas por comas)" required> -->
+                        @if (form.get('NombreVacunas')?.hasError('required') && form.get('NombreVacunas')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        }
+                    </div>
+                    <div class="group">
+                        <label for="Sintomatologia" class="form-input">Sintomatología:</label>
+                        <textarea formContProcedimientoName="Sintomatologia" id="Sintomatologia" name="Sintomatologia"
+                            rows="15" cols="50" required placeholder="Ingrese la Sintomatología"
+                            maxlength="1000"></textarea>
+                        <!-- <input formContProcedimientoName="Sintomatologia" type="text" id="Sintomatologia"
+                            class="form-input" placeholder="Ingrese la Sintomatologia" required> -->
+                        @if (form.get('Sintomatologia')?.hasError('required') && form.get('Sintomatologia')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+                        <label for="Diagnostico" class="form-input">Diagnóstico:</label>
+                        <textarea formContProcedimientoName="Diagnostico" id="Diagnostico" name="Diagnostico" rows="15"
+                            cols="50" required placeholder="Ingrese el diagnóstico" maxlength="1000"></textarea>
+                        <!-- <input formContProcedimientoName="Diagnostico" type="text" id="Diagnostico" class="form-input"
+                            placeholder="Ingrese la Diagnostico" required> -->
+                        <label for="MedicamentosAlergia" class="form-input">Medicamentos que le causan alergia:</label>
+                        <textarea formContProcedimientoName="MedicamentosAlergia" id="MedicamentosAlergia"
+                            name="MedicamentosAlergia" rows="15" cols="50" required
+                            placeholder="Ingrese los medicamentos que le causan alergia" maxlength="1000"></textarea>
+                        <!-- <input formContProcedimientoName="MedicamentosAlergia" type="text" id="MedicamentosAlergia"
+                            class="form-input" placeholder="Ingrese los Medicamentos que le causan Alergia" required> -->
+                        @if (form.get('MedicamentosAlergia')?.hasError('required') &&
+                        form.get('MedicamentosAlergia')?.touched) {
+                        <span>*Campo requerido*</span>
+                        }
+
+                    </div>
+                </div>
+
+
+                @if (orden) {
+                <form id="formOrden">
+                    Campos de orden
+                </form>
+                <button class="btn" id="btnOrden" (click)="orden=false"><fa-icon [icon]="cancelar"></fa-icon> Cancelar
+                    Orden
+                </button>
+                } @else {
+                <button class="btn" id="btnOrden" (click)="orden=true"><fa-icon [icon]="cancelar"></fa-icon> Crear Orden
+                </button>
+                }
+
+                <div class="botones">
+                    <button class="btn" id="cancel" (click)="volver()"><fa-icon [icon]="cancelar"></fa-icon> Cancelar
+                    </button>
+                    <button [disabled]="form.invalid" type="submit" class="btn" id="save"><fa-icon
+                            [icon]="guardar"></fa-icon> Guardar </button>
+                </div>
+            </form>
+
+        </div>
+    </article>
+</section>

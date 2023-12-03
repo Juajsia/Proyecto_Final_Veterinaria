@@ -20,7 +20,7 @@ try {
 export class MedicalHistoryModel {
   static async getAll () {
     try {
-      const [medicalHistory] = await connection.query('select IdHistoria_Clinica, Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, BIN_TO_UUID(IdMascota) IdMascota, IdOrden, IdVeterinario from historia_clinica;')
+      const [medicalHistory] = await connection.query('select h.IdHistoria_Clinica, h.Fecha, h.Motivo, h.Sintomatologia, h.Diagnostico, h.Procedimiento, h.MedicamentosAlergia, h.IdMascota, m.Nombre NombreMascota, IdOrden, h.IdVeterinario CedulaVeterinario from historia_clinica h inner join mascota m on m.IdMascota = h.IdMascota;')
 
       if (medicalHistory.length === 0) {
         return { msg: 'No hay registros en el historial clinico' }
@@ -44,7 +44,27 @@ export class MedicalHistoryModel {
     } catch (error) {
       return {
         typeErr: 0,
-        err: 'Error buscando registro del historial clinico'
+        err: 'Error buscando registro del historial clinico',
+        msg: error.message
+      }
+    }
+  }
+
+  static async getByPetId ({ id }) {
+    try {
+      const [medicalHistory] = await connection.query('call ConsultarPorIDMascota_Historia_Clinica(?);', [id])
+      if (medicalHistory[0].length === 0) {
+        return {
+          typeErr: 1,
+          err: 'Registro del historial clinico no existe'
+        }
+      }
+      return medicalHistory[0]
+    } catch (error) {
+      return {
+        typeErr: 0,
+        err: 'Error buscando registro del historial clinico',
+        msg: error.message
       }
     }
   }
@@ -129,7 +149,8 @@ export class MedicalHistoryModel {
       }
     } catch (error) {
       return {
-        err: 'Error actualizando registro del historial clinico'
+        err: 'Error actualizando registro del historial clinico',
+        msg: error.message
       }
     }
   }

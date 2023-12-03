@@ -335,10 +335,21 @@ DELIMITER ;
 
 Drop procedure if exists Consultar_Historia_Clinica;
 DELIMITER &&  
-CREATE PROCEDURE Consultar_Historia_Clinica (in id INT)
+CREATE PROCEDURE Consultar_Historia_Clinica (in id int)
 BEGIN    
-	 select IdHistoria_Clinica, Fecha, Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, BIN_TO_UUID(IdMascota) IdMascota, IdOrden, IdVeterinario 
-     from historia_clinica where IdHistoria_Clinica = id;
+		select h.IdHistoria_Clinica, h.Fecha, h.Motivo, h.Sintomatologia, h.Diagnostico, h.Procedimiento, h.MedicamentosAlergia, BIN_TO_UUID(h.IdMascota) IdMascota, m.Nombre NombreMascota, IdOrden, h.IdVeterinario from historia_clinica h 
+		inner join mascota m on m.IdMascota = h.IdMascota
+		where h.IdHistoria_Clinica = id;
+END &&  
+DELIMITER ;
+
+Drop procedure if exists ConsultarPorIDMascota_Historia_Clinica;
+DELIMITER &&  
+CREATE PROCEDURE ConsultarPorIDMascota_Historia_Clinica (in id varchar(36))
+BEGIN    
+		select h.IdHistoria_Clinica, h.Fecha, h.Motivo, h.Sintomatologia, h.Diagnostico, h.Procedimiento, h.MedicamentosAlergia, BIN_TO_UUID(h.IdMascota) IdMascota, m.Nombre NombreMascota, IdOrden, h.IdVeterinario CedulaVeterinario from historia_clinica h 
+		inner join mascota m on m.IdMascota = h.IdMascota
+		where h.IdMascota = UUID_TO_BIN(id);
 END &&  
 DELIMITER ;
 
