@@ -17,7 +17,7 @@ try {
 export class HistorialVacunaModel {
   static async getAll () {
     try {
-      const [hVacuna] = await connection.query('select IdHistorialVacunas, DATE(Fecha) Fecha, IdVacuna, BIN_TO_UUID(IdMascota) IdMascota from Historial_Vacunas;')
+      const [hVacuna] = await connection.query('select h.IdHistorialVacunas, h.Fecha, h.IdVacuna, v.nombre NombreVacuna, h.IdMascota, m.Nombre NombreMascota from historial_vacunas h inner join vacuna v on IdVacuna = v.IdVacuna inner join mascota m on h.IdMascota = m.IdMascota;')
       if (hVacuna.length === 0) {
         return { msg: 'No hay ningun historial de vacunación registrado' }
       }

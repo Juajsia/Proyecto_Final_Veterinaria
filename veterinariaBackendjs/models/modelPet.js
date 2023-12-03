@@ -62,7 +62,7 @@ export class PetModel {
     } catch (error) {
       return {
         err: 'Error creando Mascota',
-        msg: error
+        msg: error.message
       }
     }
   }
