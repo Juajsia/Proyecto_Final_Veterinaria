@@ -377,15 +377,8 @@ Drop procedure if exists Consultar_Historial_Vacunas;
 DELIMITER &&  
 CREATE PROCEDURE Consultar_Historial_Vacunas (in id INT)
 BEGIN    
-<<<<<<< HEAD
-	select h.IdHistorialVacunas, h.Fecha, h.IdVacuna, v.nombre NombreVacuna, h.IdMascota, m.Nombre NombreMascota from historial_vacunas h 
-	inner join vacuna v on h.IdVacuna = v.IdVacuna
-	inner join mascota m on h.IdMascota = m.IdMascota
-	where h.IdHistorialVacunas = id;
-=======
 	 select hv.IdHistorialVacunas, DATE(hv.Fecha) Fecha, v.IdVacuna, v.nombre nombreVacuna, BIN_TO_UUID(m.IdMascota) IdMascota, m.Nombre nombreMascota, m.IdDuenio from 
      Historial_Vacunas hv inner join vacuna v on v.IdVacuna = hv.IdVacuna inner join mascota m on m.IdMascota = hv.IdMascota where hv.IdHistorialVacunas = id;
->>>>>>> d9adee85a6d3a1dc0f1a0deec12d1316c26acd2a
 END &&  
 DELIMITER ;
 
