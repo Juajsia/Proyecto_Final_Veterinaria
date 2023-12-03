@@ -51,11 +51,6 @@ export class MedicalHistoryModel {
 
   static async create ({ data }) {
     try {
-      // const { id } = data
-      // const medicalHistory = await this.getById({ id })
-      // if (medicalHistory.length > 0) {
-      //   return { err: 'Registro del historial clinico ya existe' }
-      // } else {
       const { Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, NombreMascota, CedulaDueño, IdVeterinario } = data
       let { IdOrden } = data
       // validar idOrden, consultar id mascota, validar procedimiento vacuna
@@ -78,15 +73,19 @@ export class MedicalHistoryModel {
         }
       }
       const { IdMascota } = Mascota[0]
-      console.log(Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario)
+      // console.log(Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario)
       await connection.query('call Crear_Historia_Clinica(?, ?, ?, ?, ?, ?, ?, ?);', [Motivo, Sintomatologia, Diagnostico, Procedimiento, MedicamentosAlergia, IdMascota, IdOrden, IdVeterinario])
       // crear registro historial de vacunas si es el caso
       const { NombreVacunas } = data
+      // console.log(NombreVacunas)
       if (NombreVacunas) {
+        console.log('aa')
         NombreVacunas.forEach(async element => {
           await HistorialVacunaModel.create({
-            Vacuna: element,
-            IdMascota
+            data: {
+              nombreVacuna: element,
+              IdMascota
+            }
           })
         })
       }

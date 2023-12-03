@@ -377,7 +377,8 @@ Drop procedure if exists Consultar_Historial_Vacunas;
 DELIMITER &&  
 CREATE PROCEDURE Consultar_Historial_Vacunas (in id INT)
 BEGIN    
-	 select IdHistorialVacunas, Fecha, IdVacuna, BIN_TO_UUID(IdMascota) IdMascota from historial_vacunas where IdHistorialVacunas = id;
+	 select hv.IdHistorialVacunas, DATE(hv.Fecha) Fecha, v.IdVacuna, v.nombre nombreVacuna, BIN_TO_UUID(m.IdMascota) IdMascota, m.Nombre nombreMascota, m.IdDuenio from 
+     Historial_Vacunas hv inner join vacuna v on v.IdVacuna = hv.IdVacuna inner join mascota m on m.IdMascota = hv.IdMascota where hv.IdHistorialVacunas = id;
 END &&  
 DELIMITER ;
 
@@ -746,3 +747,4 @@ insert into mascota values(UUID_TO_BIN(UUID()), 'Kiara', 3, 'Perro', 'beagle', '
 
 insert into credenciales values('Admin1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1234); /* password: P@ssw0rd */
 insert into credenciales values('Juan1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1111); /* password: P@ssw0rd */
+

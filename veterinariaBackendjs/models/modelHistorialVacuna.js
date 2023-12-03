@@ -17,7 +17,7 @@ try {
 export class HistorialVacunaModel {
   static async getAll () {
     try {
-      const [hVacuna] = await connection.query('select IdHistorialVacunas, DATE(Fecha) Fecha, IdVacuna, BIN_TO_UUID(IdMascota) IdMascota from Historial_Vacunas;')
+      const [hVacuna] = await connection.query('select hv.IdHistorialVacunas, DATE(hv.Fecha) Fecha, v.IdVacuna, v.nombre nombreVacuna, BIN_TO_UUID(m.IdMascota) IdMascota, m.Nombre nombreMascota, m.IdDuenio from Historial_Vacunas hv inner join vacuna v on v.IdVacuna = hv.IdVacuna inner join mascota m on m.IdMascota = hv.IdMascota;')
       if (hVacuna.length === 0) {
         return { msg: 'No hay ningun historial de vacunación registrado' }
       }
@@ -48,13 +48,13 @@ export class HistorialVacunaModel {
 
   static async create ({ data }) {
     try {
-      const { Vacuna, IdMascota } = data
-      console.log(data)
-      let [vacuna] = await connection.query('select IdVacuna from Vacuna where nombre = ?;', [Vacuna.toLowerCase()])
-      console.log(vacuna)
+      const { nombreVacuna, IdMascota } = data
+      // console.log(data)
+      let [vacuna] = await connection.query('select IdVacuna from Vacuna where nombre = ?;', [nombreVacuna.toLowerCase()])
+      // console.log(vacuna)
       if (vacuna.length === 0) {
-        await connection.query('Call Crear_Vacuna(?);', [Vacuna.toLowerCase()]);
-        [vacuna] = await connection.query('select IdVacuna from Vacuna where nombre = ?;', [Vacuna.toLowerCase()])
+        await connection.query('Call Crear_Vacuna(?);', [nombreVacuna.toLowerCase()]);
+        [vacuna] = await connection.query('select IdVacuna from Vacuna where nombre = ?;', [nombreVacuna.toLowerCase()])
       }
       const { IdVacuna } = vacuna[0]
       await connection.query('call Crear_Historial_Vacunas(?, ?);', [IdVacuna, IdMascota])
