@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenToSquare, faPlus, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { HistorialVacuna } from '../../interfaces/historialVacuna';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class HistorialVacunaComponent {
   faTrash = faTrash
   faPenToSquare = faPenToSquare
   faPlus = faPlus
-  lupa = faMagnifyingGlass
+  lupa = faArrowLeft
   buscar = false
   listHistorialVacunas: HistorialVacuna[] = []
   listHistorialVacunasfiltrado: HistorialVacuna[] = []
@@ -39,6 +39,7 @@ export class HistorialVacunaComponent {
   }
 
   getHistorialVacuna(){
+    this.listHistorialVacunasfiltrado = []
     this._historialVacunaService.getAllHistorialVacuna().subscribe((data) => {
       if (Array.isArray(data)) {
         this.listHistorialVacunas = data.reverse()
@@ -56,7 +57,7 @@ export class HistorialVacunaComponent {
   }
 
   Buscar(){
-    this.buscar = true
+    this.router.navigate(['mascota'])
   }
 
   mostrarForm(id: number){
@@ -70,9 +71,4 @@ export class HistorialVacunaComponent {
     })
   }
 
-  filtarNombre: string = ''
-  filtarCed: string = ''
-  filtrar () {
-
-  }
 }

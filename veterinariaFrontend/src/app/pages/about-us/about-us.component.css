@@ -53,3 +53,27 @@ main {
     justify-content: space-between;
     font-weight: 700;
 }
+
+@media (width <=1000px) {
+    .about-section {
+        background-size: 80%;
+        width: 80%;
+    }
+
+    .inner-container {
+        width: 75%;
+    }
+}
+
+@media (width <=700px) {
+    .about-section {
+        background-size: 100%;
+        width: 100%;
+    }
+
+    .inner-container {
+        position: absolute;
+        width: 90%;
+        left: 30px;
+    }
+}

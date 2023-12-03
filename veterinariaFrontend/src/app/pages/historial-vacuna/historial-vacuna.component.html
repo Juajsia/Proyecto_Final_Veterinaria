@@ -2,26 +2,15 @@
 
 <main>
     <section class="acciones">
-        <h2 id="titulo">Historial Vacuna</h2>
+        @if (listHistorialVacunasfiltrado.length !== 0) {
+        <h2 id="titulo">Historial Vacuna {{listHistorialVacunasfiltrado[0].nombreMascota}}</h2>
+        }@else {
+        <div></div>
+        }
         <div>
-            @if (listHistorialVacunasfiltrado.length !== 0 && !buscar) {
-            <button class="btn" (click)="Buscar()"><fa-icon [icon]="lupa"></fa-icon> Buscar</button>
-            }
-            <button class="btn" (click)="mostrarForm(0)" id="add"><fa-icon [icon]="faPlus"></fa-icon> Agregar
-                Mascota</button>
+            <button (click)="Buscar()" class="Delete"><fa-icon [icon]="lupa"></fa-icon> Regresar</button>
         </div>
     </section>
-    @if (buscar) {
-    <section class="busqueda">
-        <form action="" id="form-buscar">
-            <input type="text" [(ngModel)]="filtarNombre" name="nombre" class="params" placeholder="Ingrese el nombre">
-            <input type="number" [(ngModel)]="filtarCed" name="cedula" class="params"
-                placeholder="Ingrese la cedula del dueño">
-            <button (click)="filtrar()" class="btn" type="button"><fa-icon [icon]="lupa"></fa-icon>
-                Buscar</button>
-        </form>
-    </section>
-    }
     @if (listHistorialVacunasfiltrado.length !== 0) {
     <section class="contenido">
         <table>
@@ -30,8 +19,6 @@
                     <th>Id</th>
                     <th>Fecha</th>
                     <th>Nombre Vacuna</th>
-                    <th>Nombre Mascota</th>
-                    <th>Cédula Dueño</th>
                     <th></th>
                 </tr>
             </thead>
@@ -41,12 +28,7 @@
                     <td>{{item.IdHistorialVacunas}}</td>
                     <td>{{item.Fecha}}</td>
                     <td>{{item.nombreVacuna}}</td>
-                    <td>{{item.nombreMascota}}</td>
-                    <td>{{item.IdDuenio}}</td>
                     <td class="btns">
-                        <button class="Edit" (click)="mostrarForm(item.IdHistorialVacunas!)">
-                            <fa-icon [icon]="faPenToSquare"></fa-icon> Editar
-                        </button>
                         <button (click)="eliminarMascota(item.IdHistorialVacunas!)" class="Delete">
                             <fa-icon [icon]="faTrash"></fa-icon> Eliminar
                         </button>

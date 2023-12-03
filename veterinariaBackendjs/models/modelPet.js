@@ -73,12 +73,15 @@ export class PetModel {
       if (pet.err) {
         return { err: 'Mascota no está registrado' }
       } else {
+        await connection.query('delete from Historia_Clinica where IdMascota = UUID_TO_BIN(?);', [id])
+        await connection.query('delete from Historial_Vacunas where IdMascota = UUID_TO_BIN(?);', [id])
         await connection.query('call Eliminar_Mascota(?);', [id])
         return { msg: 'Mascota eliminado con exito' }
       }
     } catch (error) {
       return {
-        err: 'Error eliminado Mascota'
+        err: 'Error eliminado Mascota',
+        msg: error.message
       }
     }
   }
