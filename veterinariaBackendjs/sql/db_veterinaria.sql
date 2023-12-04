@@ -459,7 +459,7 @@ Drop procedure if exists Consultar_Orden;
 DELIMITER &&  
 CREATE PROCEDURE Consultar_Orden(in id INT)
 BEGIN    
-	 select IdOrden, UUID_TO_BIN(IdMascota) IdMascota, Anulada from Orden where IdOrden = id;
+	 select IdOrden, BIN_TO_UUID(IdMascota) IdMascota, Anulada from Orden where IdOrden = id;
 END &&  
 DELIMITER ;
 
@@ -758,4 +758,3 @@ insert into mascota values(UUID_TO_BIN(UUID()), 'Kiara', 3, 'Perro', 'beagle', '
 
 insert into credenciales values('Admin1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1234); /* password: P@ssw0rd */
 insert into credenciales values('Juan1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1111); /* password: P@ssw0rd */
-

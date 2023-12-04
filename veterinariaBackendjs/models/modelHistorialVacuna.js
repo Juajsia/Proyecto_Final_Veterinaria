@@ -14,6 +14,7 @@ try {
 } catch (error) {
   throw new Error('error connecting')
 }
+
 export class HistorialVacunaModel {
   static async getAll () {
     try {
@@ -36,6 +37,7 @@ export class HistorialVacunaModel {
           err: 'Historial de Vacuna no Registrado'
         }
       }
+      console.log(hVacuna[0][0])
       return hVacuna[0]
     } catch (error) {
       return {

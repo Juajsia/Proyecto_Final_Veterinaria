@@ -13,6 +13,8 @@ import { createMedicalHistoryRouter } from './routes/routerHistoriaClinica.js'
 import { MedicalHistoryModel } from './models/modelHistoriaClinica.js'
 import { createHistorialVacunasRouter } from './routes/routerHistorialVacuna.js'
 import { HistorialVacunaModel } from './models/modelHistorialVacuna.js'
+import { createOrdenRouter } from './routes/routerOrden.js'
+import { OrdenModel } from './models/modelOrden.js'
 
 const app = express()
 app.use(cors())
@@ -20,8 +22,9 @@ app.use(express.json())
 app.use('/api/person', validateToken, validateRolToken([1]), createPersonRouter({ PersonModel }))
 app.use('/api/pet', validateToken, validateRolToken([1, 2]), createPetRouter({ PetModel }))
 app.use('/api/person', validateToken, validateRolToken([1]), createPersonRouter({ PersonModel }))
-app.use('/api/medicalHistory', createMedicalHistoryRouter({ MedicalHistoryModel }))
+app.use('/api/medicalHistory', validateToken, validateRolToken([1, 2]), createMedicalHistoryRouter({ MedicalHistoryModel }))
 app.use('/api/historialVacuna', validateToken, validateRolToken([1, 2]), createHistorialVacunasRouter({ HistorialVacunaModel }))
+app.use('/api/orden', validateToken, validateRolToken([1, 2]), createOrdenRouter({ OrdenModel }))
 app.use('/api/user', createCredRouter({ CredModel }))
 
 const PORT = process.env.PORT ?? 3000
