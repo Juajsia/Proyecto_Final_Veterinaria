@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass, faL} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass , faXmark} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router } from '@angular/router';
 import { Persona } from '../../interfaces/persona';
@@ -23,6 +23,7 @@ export class PersonaComponent {
   faPlus = faPlus
   lupa = faMagnifyingGlass
   buscar = false
+  cerrar = faXmark
   private router: Router = inject(Router)
   listPerson: Persona[] = []
   listAdmin: Persona[] = []
