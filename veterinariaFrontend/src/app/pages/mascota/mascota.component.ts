@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenToSquare, faPlus, faMagnifyingGlass , faSyringe, faFileMedical,faXmark} from '@fortawesome/free-solid-svg-icons';
 import { MascotaService } from '../../services/mascota.service';
 import { Pet } from '../../interfaces/pet';
 import { Router } from '@angular/router';
@@ -23,6 +23,9 @@ export class MascotaComponent{
   faPlus = faPlus
   lupa = faMagnifyingGlass
   buscar = false
+  vacuna = faSyringe
+  clinico = faFileMedical
+  cerrar = faXmark
   listPets: Pet[] = []
   private router: Router = inject(Router)
 
