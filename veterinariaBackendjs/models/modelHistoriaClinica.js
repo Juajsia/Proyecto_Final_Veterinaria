@@ -99,7 +99,6 @@ export class MedicalHistoryModel {
       const { NombreVacunas } = data
       // console.log(NombreVacunas)
       if (NombreVacunas) {
-        console.log('aa')
         NombreVacunas.forEach(async element => {
           await HistorialVacunaModel.create({
             data: {
