@@ -17,6 +17,9 @@
                     placeholder="Ingrese la cedula del dueño">
                 <button (click)="filtrarPersona()" class="btn" type="button"><fa-icon [icon]="lupa"></fa-icon>
                     Buscar</button>
+                    <button (click)="getPersonas()" (click)="buscar=false" class="btn" id="cerrarBuscar"
+                type="button">
+                <fa-icon [icon]="cerrar"></fa-icon> Cerrar búsqueda</button>
             </form>
         </section>
         }
@@ -153,6 +156,9 @@
                             <button (click)="eliminarPersona(item.cedula, item.Primer_Apellido)" class="Delete">
                                 <fa-icon [icon]="faTrash"></fa-icon> Eliminar
                             </button>
+                            <button  class="btn">
+                                <fa-icon [icon]="llave"></fa-icon> Credenciales
+                            </button> 
                         </td>
                     </tr>
                     }

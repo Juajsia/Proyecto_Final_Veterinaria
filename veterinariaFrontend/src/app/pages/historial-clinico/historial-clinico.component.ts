@@ -9,6 +9,7 @@ import { HistoriaClinica } from '../../interfaces/historiaClinica';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HistoriaClinicaService } from '../../services/historia-clinica.service';
 import { ToastrService } from 'ngx-toastr';
+import { MascotaService } from '../../services/mascota.service';
 
 @Component({
   selector: 'app-historial-clinico',
@@ -28,20 +29,22 @@ export class HistorialClinicoComponent {
   filtrado = false
   listHistCli: HistoriaClinica[] = []
   idMascota: string = ''
-  nombre: string = ''
+  nombre: string = localStorage.getItem('nombre')!
   private router: Router = inject(Router)
 
-  constructor (private _HistoriaClinicaService: HistoriaClinicaService, private aRouter: ActivatedRoute, private toastr: ToastrService) {
+  constructor (private _HistoriaClinicaService: HistoriaClinicaService, private _petService: MascotaService, private aRouter: ActivatedRoute, private toastr: ToastrService) {
     this.idMascota = aRouter.snapshot.paramMap.get('id')!
     this.getHistoriaClinica(this.idMascota)
+    this._petService.getById(this.idMascota).subscribe((data) => {
+      this.nombre = data[0].Nombre
+    })
   }
 
 
   getHistoriaClinica(idMascota: string){
     this._HistoriaClinicaService.getByPetId(idMascota).subscribe((data) => {
       if (Array.isArray(data)) {
-        this.listHistCli = data
-        this.nombre = this.listHistCli[0].NombreMascota
+        this.listHistCli = data        
       } else {
           this.listHistCli = []
       }
@@ -56,6 +59,7 @@ export class HistorialClinicoComponent {
   mostrarForm(id: number, idMascota: string){
     this.router.navigate([`mascota/historialClinico/formulario/${id}`])
     localStorage.setItem('idMascota', idMascota)
+    localStorage.setItem('nombre', this.nombre)
   }
   eliminarRegistro(id:number, NombreMascota: string, Procedimiento: string) {
     this._HistoriaClinicaService.deleteHistoriaClinica(id).subscribe(() => {
@@ -78,7 +82,7 @@ export class HistorialClinicoComponent {
     }
     if (this.filtarIdVet !== 0 && this.filtrarFecha === '') {
       this.listHistCli.forEach(item => {
-        if(Number(item.CedulaVeterinario) == this.filtarIdVet){
+        if(Number(item.IdVeterinario) == this.filtarIdVet){
           filteredlistHistCli.push(item)
         }
       });
@@ -98,7 +102,7 @@ export class HistorialClinicoComponent {
     }
     if (this.filtarIdVet !== 0 && this.filtrarFecha !== '') {
       this.listHistCli.forEach(item => {
-        if(item.Fecha == this.filtrarFecha && Number(item.CedulaVeterinario) == this.filtarIdVet){
+        if(item.Fecha == this.filtrarFecha && Number(item.IdVeterinario) == this.filtarIdVet){
           filteredlistHistCli.push(item)
         }
       });
