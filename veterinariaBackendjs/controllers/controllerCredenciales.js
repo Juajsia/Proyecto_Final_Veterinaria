@@ -20,6 +20,16 @@ export class CredController {
     }
   }
 
+  getByCedula = async (req, res) => {
+    const { user } = req.params
+    const cred = await this.CredModel.getByCedula({ id: user })
+    if (cred.err && cred.typeErr === 0) {
+      res.status(404).json(cred)
+    } else {
+      res.json(cred)
+    }
+  }
+
   create = async (req, res) => {
     const result = validateCred(req.body)
 

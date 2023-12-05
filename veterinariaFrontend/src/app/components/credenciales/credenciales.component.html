@@ -1,0 +1,18 @@
+<div class="body">
+    <section class="center-container">
+        <div class="form-container">
+            <button (click)="closeCredenciales()" class="close-button">X</button>
+            <h3>Credenciales: {{cedula}}</h3>
+            <form action="">
+                <input [(ngModel)]="usuario" type="text" placeholder="Usuario" name="usuario">
+                @if (boton === 'Actualizar') {
+                <input [(ngModel)]="oldPassword" type="password" placeholder="Contraseña Actual" name="oldPassword">
+                }
+                <input [(ngModel)]="newPassword" type="password" placeholder="Nueva Contraseña" name="newPassword">
+                <input [(ngModel)]="repeatPassword" type="password" placeholder="Repetir Contraseña"
+                    name="repeatPassword">
+                <button (click)="enviarForm()" type="button">{{boton}}</button>
+            </form>
+        </div>
+    </section>
+</div>

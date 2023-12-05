@@ -1,20 +1,9 @@
 /* eslint-disable camelcase */
-import mysql from 'mysql2/promise'
+// import mysql from 'mysql2/promise'
 
-const DEFAULT_CONFIG = {
-  host: 'localhost',
-  user: 'root',
-  port: 3306,
-  password: '1234',
-  database: 'db_veterinaria'
-}
-const connectionString = process.env.DATABASE_URL ?? DEFAULT_CONFIG
-let connection
-try {
-  connection = await mysql.createConnection(connectionString)
-} catch (error) {
-  throw new Error('error connecting')
-}
+import { crearConexion } from '../db.js'
+
+const connection = await crearConexion()
 
 export class PersonModel {
   static async getAll () {

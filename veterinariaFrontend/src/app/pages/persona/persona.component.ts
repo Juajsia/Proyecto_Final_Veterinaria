@@ -9,11 +9,13 @@ import { Persona } from '../../interfaces/persona';
 import { PersonaService } from '../../services/persona.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import { CredencialesComponent } from '../../components/credenciales/credenciales.component';
+import { CredencialesService } from '../../services/credenciales.service';
 
 @Component({
   selector: 'app-persona',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent, FontAwesomeModule, FormsModule],
+  imports: [CommonModule, NavbarComponent, FooterComponent, FontAwesomeModule, FormsModule, CredencialesComponent],
   templateUrl: './persona.component.html',
   styleUrl: './persona.component.css'
 })
@@ -25,6 +27,7 @@ export class PersonaComponent {
   buscar = false
   cerrar = faXmark
   llave=faKey
+  switchCredenciales = false
   private router: Router = inject(Router)
   listPerson: Persona[] = []
   listAdmin: Persona[] = []
@@ -32,8 +35,13 @@ export class PersonaComponent {
   listVendedor: Persona[] = []
   listDuenio: Persona[] = []
 
-  constructor(private _personService: PersonaService, private toastr: ToastrService) {
+  constructor(private _personService: PersonaService, private toastr: ToastrService, private _CredencialesService: CredencialesService) {
     this.getPersonas()
+    this._CredencialesService.$modal.subscribe(valor => { this.switchCredenciales = valor })
+  }
+  openCredenciales(cedula: number) {
+    this.switchCredenciales = true
+    localStorage.setItem('cedula', String(cedula))
   }
 
   filtrarRol(){

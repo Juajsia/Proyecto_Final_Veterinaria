@@ -1,22 +1,10 @@
 /* eslint-disable camelcase */
-import mysql from 'mysql2/promise'
+// import mysql from 'mysql2/promise'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { crearConexion } from '../db.js'
 
-const DEFAULT_CONFIG = {
-  host: 'localhost',
-  user: 'root',
-  port: 3306,
-  password: '1234',
-  database: 'db_veterinaria'
-}
-const connectionString = process.env.DATABASE_URL ?? DEFAULT_CONFIG
-let connection
-try {
-  connection = await mysql.createConnection(connectionString)
-} catch (error) {
-  throw new Error('error connecting')
-}
+const connection = await crearConexion()
 
 export class CredModel {
   static async getAll () {
@@ -46,6 +34,25 @@ export class CredModel {
       return {
         typeErr: 0,
         err: 'Error Buscando credenciales'
+      }
+    }
+  }
+
+  static async getByCedula ({ id }) {
+    try {
+      const [creds] = await connection.query('select * from Credenciales where idPersona = ?;', [id])
+      if (creds.length === 0) {
+        return {
+          typeErr: 1,
+          err: 'credenciales no Registradas'
+        }
+      }
+      return creds
+    } catch (error) {
+      return {
+        typeErr: 0,
+        err: 'Error Buscando credenciales',
+        msg: error.message
       }
     }
   }
