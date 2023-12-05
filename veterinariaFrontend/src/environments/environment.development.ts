@@ -1,3 +1,3 @@
 export const environment = {
-    appUrl: 'http://localhost:3000/'
+    appUrl: 'https://veterinaria-backend-w7ne.onrender.com/'
 };

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Persona } from '../interfaces/persona';
 import { msg } from '../interfaces/pet';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class PersonaService {
   private myAppUrl: string
   private myApiUrl: string
   constructor(private http:HttpClient) {
-    this.myAppUrl = 'http://localhost:3000/'
+    this.myAppUrl = environment.appUrl || 'http://localhost:3000/'
     this.myApiUrl = 'api/person'
    }
 

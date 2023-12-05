@@ -11,7 +11,7 @@ export class CredencialesService {
   private myAppUrl: string
   private myApiUrl: string
   constructor(private http:HttpClient) {
-    this.myAppUrl = environment.appUrl
+    this.myAppUrl = environment.appUrl || 'http://localhost:3000/'
     this.myApiUrl = 'api/user'
    }
 
