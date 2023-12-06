@@ -11,6 +11,7 @@ import { HistorialVacunaComponent } from './pages/historial-vacuna/historial-vac
 import { HistoriaClinicaService } from './services/historia-clinica.service';
 import { HistorialClinicoComponent } from './pages/historial-clinico/historial-clinico.component';
 import { FormularioHistorialClinicoComponent } from './components/formulario-historial-clinico/formulario-historial-clinico.component';
+import { GuiaUsuarioComponent } from './pages/guia-usuario/guia-usuario.component';
 
 export const routes: Routes = [{
     title: 'Home',
@@ -20,6 +21,10 @@ export const routes: Routes = [{
     title: 'About Us',
     path: 'about',
     component: AboutUsComponent
+}, {
+    title: 'Guia Usuario',
+    path: 'guia',
+    component: GuiaUsuarioComponent
 },{
     title: 'Login',
     path: 'login',
