@@ -2,9 +2,9 @@
 /*Creación de la base de Datos*/
 --------------------------------------------------------------------------------
 
-Drop database if exists db_Veterinaria;
-create database db_Veterinaria;
-use db_Veterinaria;
+Drop database if exists bf0vupe6gntjsg5qfsaz;
+create database bf0vupe6gntjsg5qfsaz;
+use bf0vupe6gntjsg5qfsaz;
 
 --------------------------------------------------------------------------------
 /*Declaración de las Tablas*/
@@ -459,7 +459,7 @@ Drop procedure if exists Consultar_Orden;
 DELIMITER &&  
 CREATE PROCEDURE Consultar_Orden(in id INT)
 BEGIN    
-	 select IdOrden, BIN_TO_UUID(IdMascota) IdMascota, Anulada from Orden where IdOrden = id;
+	 select IdOrden, UUID_TO_BIN(IdMascota) IdMascota, Anulada from Orden where IdOrden = id;
 END &&  
 DELIMITER ;
 
@@ -677,7 +677,7 @@ BEGIN
 END &&  
 DELIMITER ;
 
-insert into rol (nombreRol) values
+insert into Rol (NombreRol) values
 ("Administrador"),
 ("Veterinario"),
 ("Vendedor"),
@@ -709,6 +709,7 @@ GRANT SELECT ON db_veterinaria.Orden TO 'Vendedor';
 */
 -- creación de los Usuarios
 
+/*
 Drop user if exists 'User_Administrador'@'localhost', 'User_Veterinario'@'localhost', 'User_Vendedor'@'localhost', 'User_Login'@'localhost';
 CREATE USER 'User_Administrador'@'localhost' IDENTIFIED BY 'admin123';
 CREATE USER 'User_Veterinario'@'localhost' IDENTIFIED BY 'veterinario123';
@@ -734,7 +735,7 @@ GRANT SELECT, INSERT, UPDATE ON db_veterinaria.Factura TO 'User_Vendedor'@'local
 GRANT SELECT, INSERT, UPDATE ON db_veterinaria.factura_producto TO 'User_Vendedor'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON db_veterinaria.producto TO 'User_Vendedor'@'localhost';
 GRANT SELECT ON db_veterinaria.Orden TO 'User_Vendedor'@'localhost';
-
+*/
 
 /*
 GRANT 'Admin' TO 'User_Administrador'@'localhost';
@@ -742,19 +743,20 @@ GRANT 'Veterinario' TO 'User_Veterinario'@'localhost';
 GRANT 'Vendedor' TO 'User_Vendedor'@'localhost';
 GRANT 'login_management' TO 'User_Login'@'localhost';
 */
-FLUSH PRIVILEGES;
+-- FLUSH PRIVILEGES;
 
-insert into persona values(1234, 'Admin', 'Admin', 'Admin', 'Admin', 100, 1);
-insert into persona values(1111, 'Juan', 'Jose', 'Estrada', 'Velez', 20, 2);
-insert into persona values(4321, 'Isac', '', 'Cortes', 'Buitrago', 19, 3);
-insert into persona values(5412, 'Juan', 'pablo', 'Adams', 'Parra', 21, 4);
-insert into persona values(6666, 'Emmanuel', '', 'Bolivar', 'Marin', 20, 2);
-insert into persona values(2211, 'Juan', 'Esteban', 'Henao', 'Giraldo', 20, 2);
+insert into Persona values(1234, 'Admin', 'Admin', 'Admin', 'Admin', 100, 1);
+insert into Persona values(1111, 'Juan', 'Jose', 'Estrada', 'Velez', 20, 2);
+insert into Persona values(4321, 'Isac', '', 'Cortes', 'Buitrago', 19, 3);
+insert into Persona values(5412, 'Juan', 'pablo', 'Adams', 'Parra', 21, 4);
+insert into Persona values(6666, 'Emmanuel', '', 'Bolivar', 'Marin', 20, 2);
+insert into Persona values(2211, 'Juan', 'Esteban', 'Henao', 'Giraldo', 20, 2);
 
-insert into mascota values(UUID_TO_BIN(UUID()), 'Lucas', 4, 'Pajaro', 'canario', 'amarillo', 20, 5, 6666);
-insert into mascota values(UUID_TO_BIN(UUID()), 'Luna', 10, 'Perro', 'Hijueputa', 'Negro', 20, 5, 4321);
-insert into mascota values(UUID_TO_BIN(UUID()), 'Toby', 2, 'Gato', 'casita', 'gris', 40, 8, 5412);
-insert into mascota values(UUID_TO_BIN(UUID()), 'Kiara', 3, 'Perro', 'beagle', 'Naranja/negro', 40, 15, 1111);
+insert into Mascota values(UUID_TO_BIN(UUID()), 'Lucas', 4, 'Pajaro', 'canario', 'amarillo', 20, 5, 6666);
+insert into Mascota values(UUID_TO_BIN(UUID()), 'Luna', 10, 'Perro', 'Hijueputa', 'Negro', 20, 5, 4321);
+insert into Mascota values(UUID_TO_BIN(UUID()), 'Toby', 2, 'Gato', 'casita', 'gris', 40, 8, 5412);
+insert into Mascota values(UUID_TO_BIN(UUID()), 'Kiara', 3, 'Perro', 'beagle', 'Naranja/negro', 40, 15, 1111);
 
-insert into credenciales values('Admin1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1234); /* password: P@ssw0rd */
-insert into credenciales values('Juan1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1111); /* password: P@ssw0rd */
+insert into Credenciales values('Admin1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1234); /* password: P@ssw0rd */
+insert into Credenciales values('Juan1', '$2b$12$4NJy10lNK4DkUO25Ym1zVewPzZcgRtsfeOQomct5RLnAETh74Idea', 1111); /* password: P@ssw0rd */
+

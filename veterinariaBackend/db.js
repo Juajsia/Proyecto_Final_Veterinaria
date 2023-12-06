@@ -11,6 +11,7 @@ export async function crearConexion () {
     })
     return connection
   } catch (error) {
+    console.log(error)
     throw new Error('error connecting')
   }
 }

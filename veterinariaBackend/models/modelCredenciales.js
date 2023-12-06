@@ -2,14 +2,15 @@
 // import mysql from 'mysql2/promise'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { crearConexion } from '../db.js'
-
-const connection = await crearConexion()
 
 export class CredModel {
-  static async getAll () {
+  constructor (connection) {
+    this.connection = connection
+  }
+
+  async getAll () {
     try {
-      const [creds] = await connection.query('select * from credenciales;')
+      const [creds] = await this.connection.query('select * from credenciales;')
 
       if (creds.length === 0) {
         return { msg: 'No hay credenciales Registradas' }
@@ -20,9 +21,9 @@ export class CredModel {
     }
   }
 
-  static async getByUser ({ user }) {
+  async getByUser ({ user }) {
     try {
-      const [creds] = await connection.query('call Consultar_Credenciales(?);', [user])
+      const [creds] = await this.connection.query('call Consultar_Credenciales(?);', [user])
       if (creds[0].length === 0) {
         return {
           typeErr: 1,
@@ -38,9 +39,9 @@ export class CredModel {
     }
   }
 
-  static async getByCedula ({ id }) {
+  async getByCedula ({ id }) {
     try {
-      const [creds] = await connection.query('select * from Credenciales where idPersona = ?;', [id])
+      const [creds] = await this.connection.query('select * from credenciales where idPersona = ?;', [id])
       if (creds.length === 0) {
         return {
           typeErr: 1,
@@ -57,7 +58,7 @@ export class CredModel {
     }
   }
 
-  static async create ({ data }) {
+  async create ({ data }) {
     try {
       const { Usuario } = data
       const cred = await this.getByUser({ user: Usuario })
@@ -66,7 +67,7 @@ export class CredModel {
       } else {
         const { Contrasenia, idPersona } = data
         const password = await bcrypt.hash(Contrasenia, 12)
-        await connection.query('call Crear_Credenciales(?, ?, ?);', [Usuario, password, idPersona])
+        await this.connection.query('call Crear_Credenciales(?, ?, ?);', [Usuario, password, idPersona])
         return { msg: `usuario ${Usuario} registrado con exito` }
       }
     } catch (error) {
@@ -77,13 +78,13 @@ export class CredModel {
     }
   }
 
-  static async delete ({ user }) {
+  async delete ({ user }) {
     try {
       const cred = await this.getByUser({ user })
       if (cred.err) {
         return { err: 'usuario no está registrado' }
       } else {
-        await connection.query('call Eliminar_Credenciales(?);', [user])
+        await this.connection.query('call Eliminar_Credenciales(?);', [user])
         return { msg: 'credenciales eliminadas con exito' }
       }
     } catch (error) {
@@ -94,7 +95,7 @@ export class CredModel {
     }
   }
 
-  static async update ({ oldUser, data }) {
+  async update ({ oldUser, data }) {
     try {
       const cred = await this.getByUser({ user: oldUser })
       if (cred.err) {
@@ -103,7 +104,7 @@ export class CredModel {
         const usuarioAct = { ...cred[0], ...data }
         const { Usuario: newUser, Contrasenia, idPersona } = usuarioAct
         const password = await bcrypt.hash(Contrasenia, 12)
-        await connection.query('call Actualizar_Credenciales(?, ?, ?, ?);', [oldUser, newUser, password, idPersona])
+        await this.connection.query('call Actualizar_Credenciales(?, ?, ?, ?);', [oldUser, newUser, password, idPersona])
         return { msg: 'credenciales actualizadas con exito' }
       }
     } catch (error) {
@@ -114,10 +115,10 @@ export class CredModel {
     }
   }
 
-  static async login ({ data }) {
+  async login ({ data }) {
     const { Usuario, Contrasenia } = data
     try {
-      const [cred] = await connection.query('Select * from Credenciales where Usuario = ?;', [Usuario])
+      const [cred] = await this.connection.query('Select * from credenciales where Usuario = ?;', [Usuario])
       if (cred.length === 0) {
         return {
           typeErr: 1,
@@ -128,13 +129,13 @@ export class CredModel {
       if (!eq) {
         return { err: 'Error en usuario/contraseña' }
       }
-      const [rol] = await connection.query('select IdRol from Persona where cedula = ?;', [cred[0].idPersona])
+      const [rol] = await this.connection.query('select IdRol from persona where cedula = ?;', [cred[0].idPersona])
       const token = createToken({ data: { Usuario, Rol: rol[0].IdRol } })
       return { succes: 'Login Correcto', token, Rol: rol[0].IdRol }
     } catch (error) {
       return {
         err: 'Error buscando credenciales',
-        msg: error
+        msg: error.message
       }
     }
   }
